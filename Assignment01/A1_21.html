@@ -1,0 +1,61 @@
+<!-- 
+Sept 18 2013
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00541xxx
+21) Create a program that calculates the gross pay of an employee, taking into account overtime compensation. To do this:
+a. Take in employee name.
+b. Take in employee rate pay.
+c. Take in employee hours worked that week.
+d. If hours over 40, then the hours minus 40 should have a rate of time and a half added to the total 40 * rate.
+e. Print results.
+f. Repeat until all employees are added.
+-->
+<html>
+<head>
+	<title>Gross pay</title>
+	<script type="text/javascript">
+	function calculateGrossPayForOneEmployee() // Create a new payroll function
+	{
+		employee1 = new Object(); // Create a new object called employee 1
+		//a. Take in employee name.
+		employee1.identity = prompt("Please enter the name of this employee: ", "");
+		//b. Take in employee rate pay.
+		employee1.rate_pay = parseFloat(prompt("Employee's rate pay: ", ""));
+		//c. Take in employee hours worked that week.
+		employee1.hours = parseFloat(prompt("Hours worked this week: ", ""));
+
+		if (employee1.hours > 40) //d. If hours over 40, then the hours minus 40 should have a rate of time and a half added to the total 40 * rate.
+		{
+			employee1.overtime_rate = 1.5;
+			employee1.overtime = employee1.hours - 40;
+			employee1.overtime_due = employee1.overtime * employee1.overtime_rate;
+			total_owed = employee1.overtime_due + (40 * employee1.rate_pay); // Calculate the total dollars owed
+		}
+		else // The employee has not worked more than 40 hours a week
+		{
+			total_owed = employee1.hours * employee1.rate_pay; // Calculate the total dollars owed
+		}
+		//e. Print results.
+		document.write("Gross pay for " + employee1.identity + ", is <b>" + total_owed + "</b> dollars!")
+		document.write("<br/>Rate pay: <b>" + employee1.rate_pay + "</b>");
+		document.write("<br/>Hours worked: <b>" + employee1.hours + "</b><br/><br/>");
+
+	}
+	function payroll() // Create a new payroll function
+	{
+		addEmployee = prompt("Add an Employee? ", "Y");
+		if (addEmployee == "Y")
+		{
+			calculateGrossPayForOneEmployee()
+		}
+		//f. Repeat until all employees are added.		
+	}
+	</script>
+</head>
+<body>
+	<h1>Gross pay program</h1>
+	<h2>Please click the button when you want to calculate payroll!</h2>
+	<h3>Note: employees accrue overtime after they have worked 40 hours in one week!</h3>
+	<input type="button" value="Payroll calculator" onclick="payroll()" />
+</body>
+</html>

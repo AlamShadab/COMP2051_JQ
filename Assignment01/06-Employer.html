@@ -1,0 +1,66 @@
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+  <title>Employee salary</title>
+  <script type="text/javascript">
+    function calculate() {
+	   var grossIncome = 0;
+	   var deductions = 0;
+	   var taxes = 0;
+	   var savings = 0;
+	   
+	   grossIncome = (parseFloat(document.getElementById("HourPay").value)*parseFloat(document.getElementById("HoursWeek").value))+
+	     (parseFloat(document.getElementById("OvertimeRate").value)*parseFloat(document.getElementById("OvertimeHours").value));
+	   savings = (parseFloat(document.getElementById("SavingsRate").value)*grossIncome/100);
+	   taxes = (parseFloat(document.getElementById("TaxRate").value)*grossIncome/100);
+	   deductions = parseFloat(document.getElementById("MedInsurance").value)+taxes+savings;
+	   alert(document.getElementById("EmployeeName").value+" earns $"+parseFloat(grossIncome).toFixed(2)+"\nTaxes $"+
+	     parseFloat(taxes).toFixed(2)+"\nSavings $"+parseFloat(savings).toFixed(2)+"\nMedical Insurance $"+
+	     parseFloat(document.getElementById("MedInsurance").value).toFixed(2)+"\nTotal Deductions $"+parseFloat(deductions).toFixed(2)+
+	     "\nNet Income $"+parseFloat(grossIncome - deductions).toFixed(2));
+    }
+  </script>
+  </head>
+  <body>
+    <form id="frmSalary" method="post">
+      <table id="tblEmployee" cellpadding="3" cellspacing="1">
+        <tr>
+          <td>Employee Name</td>
+          <td><input type="text" id="EmployeeName" value=""></td>
+        </tr>
+        <tr>
+          <td>Hour rate</td>
+          <td><input type="number" id="HourPay" value="10" min="10"></td>
+        </tr>
+        <tr>
+          <td>Hours worked per week</td>
+          <td><input type="number" id="HoursWeek" value="0" min="0" max="40"></td>
+        </tr>
+        <tr>
+          <td>Overtime hour rate</td>
+          <td><input type="number" id="OvertimeRate" value="15" min="12"></td>
+        </tr>
+        <tr>
+          <td>Overtime hours worked</td>
+          <td><input type="number" id="OvertimeHours" value="0" min="0"></td>
+        </tr>
+        <tr>
+          <td>Tax Rate</td>
+          <td><input type="number" id="TaxRate" value="0" min="0">%</td>
+        </tr>
+        <tr>
+          <td>Medical insurance value $</td>
+          <td><input type="number" id="MedInsurance" value="0" min="0"></td>
+        </tr>
+        <tr>
+          <td>Savings rate</td>
+          <td><input type="number" id="SavingsRate" value="0">%</td>
+        </tr>
+        <tr>
+          <td><input type="button" value="Calculate" onclick="calculate()"></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+    </form>
+  </body>
+</html>

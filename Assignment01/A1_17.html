@@ -1,0 +1,48 @@
+<!-- 
+Sept 18 2013
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00541xxx
+17) Write a javascript statment to accomplish each of the following tasks:
+a. Assign the sum of x and y to z, and increment the value of x by 1 after the calculation. Use only one statment.
+b. Test whether the value of the variable count is greater than 10. If it is, then print "Count is greater than ten.".
+c. Decrement the variable x by 1, then subtract it from the variable total. Use only one statement.
+d. Calculate the remainder after q is divided by divisor, and assign the result to q. Write this statment in two different ways.
+e. Declare variables sum and x.
+f. Assign 1 to variable x.
+g. Assign 0 to variable sum.
+h. Add variable x to variable sum, and assign the result to variable sum. Print "The sum is: ", followed by the value of variable sum.
+-->
+
+
+<html>
+<head>
+	<title>JavaScript Condition</title>
+	<script type="text/javascript">
+		x = parseInt(prompt("Please enter the value for x", "0")); // Note that the initial value is set as zero
+		y = parseInt(prompt("Please enter the value for y", "0")); // Note that the initial value is set as zero
+		z = y + x++;//Assign the sum of x and y to z, and increment the value of x by 1 after the calculation. Use only one statment.
+		//Test whether the value of the variable count is greater than 10. If it is, then print "Count is greater than ten.".
+		if (x > 10)
+		{
+			document.write("Count is greater than ten.");
+		}
+		//Decrement the variable x by 1, then subtract it from the variable total. Use only one statement.
+		z = x--;
+
+		//Calculate the remainder after q is divided by divisor, and assign the result to q. Write this statment in two different ways.
+		//Declare variables sum and x.
+		var sum;
+		var x;
+		//Assign 1 to variable x.
+		x = 1;
+		//Assign 0 to variable sum.
+		sum = 0;
+		//Add variable x to variable sum, and assign the result to variable sum. Print "The sum is: ", followed by the value of variable sum.
+		sum += x; // same as sum = sum + x
+		document.write("The sum is: " + sum);
+	</script>
+</head>
+<body>
+	<!-- There is no body for this snippet of code -->
+</body>
+</html>

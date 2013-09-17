@@ -1,0 +1,48 @@
+<!-- 
+Sept 18 2013
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00541xxx
+19) Write a program that calculates whether a customer has exceeded the credit limit of an account. To do this:
+a. Obtain account number, balance previous, total charges, total payments/credits, and credit limit.
+b. Calculate current debt balance
+c. Compare that the debt is < credit limit, if so print leftover credit, if not print credit exceeded
+-->
+
+
+<html>
+<head>
+	<meta charset = "utf=8">
+	<title>Credit Limit</title>
+
+	<h1>Credit account system</h1>
+	<hr> <!-- Enter a horizontal rule to break up text -->
+	<script = "text/javascript">
+		//a. Obtain account number, balance previous, total charges, total payments/credits, and credit limit.
+		var account = parseInt(prompt("Please enter the account nummber you wish to query:", ""));
+		var prev_balance = parseFloat(prompt("Please enter the starting balance on the account:",""));
+		var current_charges = parseFloat(prompt("Please enter the charges incurred over the last 30 days:",""));
+		var payments = parseFloat(prompt("Please enter the total payments made over the last 30 days:",""));
+		var credit_limit = parseFloat(prompt("Please enter the credit limit on the current account:",""));
+		
+		//b. Calculate current debt balance
+		var balance_owing;
+		balance_owing = prev_balance - payments + current_charges;
+
+		//c. Compare that the debt is < credit limit, if so print leftover credit, if not print credit exceeded
+		if (balance_owing < credit_limit)
+		{
+			document.writeln("The current account is not overdrawn.");
+			document.writeln("Your client has a total of " + (credit_limit.toFixed(2) - balance_owing.toFixed(2)) + " available before reaching their credit limit!");
+		}
+		else
+		{
+			document.writeln("The current account is overdrawn.");
+			document.writeln("Your client has exceeded the credit limit by a total of " + (balance_owing.toFixed(2) - credit_limit.toFixed(2)) + ".");	
+		}
+
+	</script>
+</head>
+<body>
+	<!-- There is not body section here -->
+</body>
+</html>

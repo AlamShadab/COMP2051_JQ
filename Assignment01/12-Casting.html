@@ -1,0 +1,28 @@
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+  <title>Employee salary</title>
+  </head>
+  <script type="text/javascript" >
+    function getStringValue(stringValue){
+      paramsIni = window.location.indexOf("?");
+      result = "0";
+      if (paramsIni > 0){
+        var arrParams = window.location.substring(paramsIni, window.location.length).split("&");
+        for (var i=0, i<arrParams.length; i++){
+          
+        }
+      }
+      return "0";
+    }
+    function Init(){
+	    var age;
+	    age = parseInt(<%=paramAge%>)); //ASP
+	    age = parseInt($_GET["paramAge"]); //PHP
+	    alert(age);
+    }
+  </script>
+</script>
+  <body onload="Init();">
+  </body>
+</html>

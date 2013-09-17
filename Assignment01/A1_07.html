@@ -1,0 +1,25 @@
+<!-- 
+Sept 18 2013
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00541xxx
+7) Create a web page that will run a JavaScript script as soon as the page loads, using the onload event. 
+The script should display the following: JavaScript rules!
+
+-->
+
+
+<html>
+<head>
+	<title>JavaScript Rocks</title>
+	<script type="text/javascript">
+		function welcome()
+		{
+			alert("JavaScript Rocks!"); // Using the alert function
+			document.write("JavaScript Rocks!") // Using the .write method for the document object
+		}
+	</script>
+</head>
+<body onload="welcome()">
+	<!-- Run the function when the page loads -->
+</body>
+</html>

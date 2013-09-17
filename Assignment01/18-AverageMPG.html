@@ -1,0 +1,77 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+	  <title>Average Miles Per Gallon</title>
+	  <script type="text/javascript">
+	    var numTanks = "a";
+	    var arrTanks;
+	    var currentTank = 0;
+
+	    function Init(){
+		    while (isNaN(parseInt(numTanks))){
+		      numTanks = parseInt(prompt("Please type the number of tanks", ""));
+		    }
+		    arrTanks = new Array(numTanks-1);
+		    document.getElementById("tableTitle").childNodes[0].textContent = "Tank 1";
+	    }
+
+		 function calculateAverage(){
+		   var panel = document.createElement("div");
+		   var totGallons = 0;
+		   var totMiles = 0;
+		   var label, avgLabel;
+		   for (var u=0; u < numTanks; u++){
+		     label = document.createElement("label");
+		     label.textContent="Tank "+(u+1)+" average: ";
+		     label.style.fontWeight = "900";
+		     avgLabel = document.createElement("label");
+		     avgLabel.textContent=parseFloat(arrTanks[u][1]/arrTanks[u][0])+" miles/gallon";
+		     panel.appendChild(label);
+		     panel.appendChild(avgLabel);
+		     panel.appendChild(document.createElement("br"));
+		     totGallons += arrTanks[u][0];
+		     totMiles += arrTanks[u][1];
+		   }
+		   label = document.createElement("label");
+		   label.textContent="Total average: ";
+		   label.style.fontWeight = "900";
+		   avgLabel = document.createElement("label");
+		   avgLabel.textContent=parseFloat(totMiles/totGallons)+" miles per gallon";
+	      panel.appendChild(label);
+	      panel.appendChild(avgLabel);
+	      document.body.appendChild(panel);
+		 }
+
+		 function addTankInfo(){
+		   while (isNaN(parseFloat(document.getElementById("filled").value))){
+		     alert("Please type a correct number of gallons filled "+(parseInt(currentTank)+1).toString());
+		     document.getElementById("filled").focus();
+		   }
+		   
+		   while (isNaN(parseFloat(document.getElementById("miles").value))){
+		     alert("Please type a correct number of miles driven "+(parseInt(currentTank)+1))
+		     document.getElementById("miles").focus();
+		   }
+		   
+		   arrTanks[currentTank]= new Array(parseFloat(document.getElementById("filled").value), parseFloat(document.getElementById("miles").value));
+		   currentTank++;
+		   if (currentTank == numTanks){
+		     calculateAverage();
+		   }else if (currentTank < numTanks){
+		     document.getElementById("tableTitle").childNodes[0].textContent = "Tank "+(parseInt(currentTank)+1);
+		     document.getElementById("filled").focus();
+		   }
+	    }
+	  </script>
+  </head>
+  <body onload="Init()">
+      <table cellpadding="3" cellspacing="1">
+        <tr><th colspan="3" id="tableTitle"> </th></tr>
+        <tr><td>Gallons filled: </td><td><input type="number" id="filled" value="0"></td></tr>
+        <tr><td>Miles driven: </td><td><input type="number" id="miles" value="0"></td></tr>
+        <tr><td id="lblResult"> </td><td id="result"> </td></tr>
+        <tr><td colspan="2"><input type="button" value="Add" onclick="addTankInfo()"></td></tr>
+      </table>
+      <br />
+  </body>
+</html>

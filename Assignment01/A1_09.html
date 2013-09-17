@@ -1,0 +1,39 @@
+<!-- 
+Sept 18 2013
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00541xxx
+9) Create a web page that contains two buttons. 
+When the first is clicked, the user will be prompted to enter a first name, then a last name. 
+These names will be concatenated to form a username with a dot between the first and last names. 
+The second button will prompt the user for a nickname.
+-->
+
+
+<html>
+<head>
+	<title>JavaScript Rocks</title>
+	<script type="text/javascript">
+		function askName()
+		{
+			var firstName = prompt("Please enter your first name", " "); // input the firstName variable
+			var lastName = prompt("Please enter your last name", " "); // input the lastName variable
+
+			//document.write("Hello there " + firstName + "." + lastName + "!") // Using the .write method for the document object
+			alert("Hello there " + firstName + "." + lastName + "!") 
+		}
+		function askNickName()
+		{
+			var nickName = prompt("Please enter your nick name", " "); // input the nickName variable
+
+			alert("Hello there " + nickName + "!") // Using the .write method for the document object
+		}
+	</script>
+</head>
+<body>
+	<h1>Welcome!</h1>
+	<p><input type ="button" id="myButton" value="Enter Name" 
+		onclick="askName();"/></p>
+	<p><input type ="button" id="myButton" value="Enter NickName" 
+		onclick="askNickName();"/></p>
+</body>
+</html>

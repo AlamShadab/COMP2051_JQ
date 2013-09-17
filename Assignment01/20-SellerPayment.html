@@ -1,0 +1,109 @@
+<html>
+  <head>
+	  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+	  <title>Average Miles Per Gallon</title>
+	  <script type="text/javascript">
+	    var arrSales = new Array();
+	    var counter = 1;
+
+		 function calculate(){
+		   var totSales = 0;
+		   var totCommission = 0;
+		   var row, cell;
+		   var myNode = document.getElementById("rows");
+			while (myNode.firstChild) {
+			  myNode.removeChild(myNode.firstChild);
+			}
+		   for (var u=0; u < arrSales.length; u++){
+		     row = document.createElement("tr");
+		     cell = document.createElement("th");
+		     cell.textContent=(u+1);
+		     row.appendChild(cell);
+		     cell = document.createElement("td");
+		     cell.textContent = " $ "+parseFloat(arrSales[u]).toFixed(2);
+		     cell.style.textAlign = "right";
+		     row.appendChild(cell);
+		     cell = document.createElement("td");
+		     cell.textContent = " $ "+parseFloat(arrSales[u]*parseFloat(document.getElementById("commission").value)/100).toFixed(2);
+		     cell.style.textAlign = "right";
+		     row.appendChild(cell);
+		     cell = document.createElement("td");
+		     cell.textContent = " $ "+parseFloat(arrSales[u]+arrSales[u]*parseFloat(document.getElementById("commission").value)/100).toFixed(2);
+		     cell.style.textAlign = "right";
+		     row.appendChild(cell);
+		     document.getElementById("rows").appendChild(row);
+		     totSales += arrSales[u];
+		     totCommission += arrSales[u]*(parseFloat(document.getElementById("commission").value)/100);
+		   }
+ 	      row = document.createElement("tr");
+	      cell = document.createElement("th");
+	      cell.textContent="Total";
+	      row.appendChild(cell);
+	      cell = document.createElement("th");
+	      cell.textContent = " $ "+parseFloat(totSales).toFixed(2);
+	      cell.style.textAlign = "right";
+	      row.appendChild(cell);
+	      cell = document.createElement("th");
+	      cell.textContent = " $ "+parseFloat(totCommission).toFixed(2);
+	      cell.style.textAlign = "right";
+	      row.appendChild(cell);
+	      cell = document.createElement("th");
+	      cell.textContent = " $ "+parseFloat(totSales+totCommission).toFixed(2);
+	      cell.style.textAlign = "right";
+	      row.appendChild(cell);
+
+ 	      row = document.createElement("tr");
+	      cell = document.createElement("th");
+	      cell.textContent="Base Payment";
+	      row.appendChild(cell);
+	      cell = document.createElement("td");
+	      cell.textContent = " $ "+parseFloat(document.getElementById("basePay").value).toFixed(2);
+	      cell.style.textAlign = "right";
+	      row.appendChild(cell);
+	      cell = document.createElement("th");
+	      cell.textContent = "Total Payment";
+	      row.appendChild(cell);
+	      cell = document.createElement("th");
+	      cell.textContent = " $ "+parseFloat(totSales+totCommission+parseFloat(document.getElementById("basePay").value)).toFixed(2);
+	      cell.style.textAlign = "right";
+	      row.appendChild(cell);
+	      document.getElementById("rows").appendChild(row);
+	      document.getElementById("result").style.display = "block";
+		 }
+
+		 function addSaleInfo(){
+		   var sale = parseFloat(window.prompt("Please type the amount of the sale "+counter, "0"));
+		   while (isNaN(sale)) {
+		     alert("Please type a correct sale value for the sale "+counter);
+		     sale = parseFloat(window.prompt("Please type the amount of the sale "+counter, "0"));
+		   }
+		   if (sale > 0){
+			   arrSales.push(sale);
+			   counter++;
+			   addSaleInfo();
+			}else{
+			  calculate();
+			  arrSales = new Array();
+			  counter = 1;
+			}
+	    }
+	  </script>
+  </head>
+  <body>
+      <table cellpadding="3" cellspacing="1">
+        <tr><th colspan="3" id="tableTitle"> </th></tr>
+        <tr><td>Commission Rate[%]: </td><td><input type="number" id="commission" value="0" min="0" max="100" size="10"></td></tr>
+        <tr><td>Base pay [$]: </td><td><input type="number" id="basePay" value="0" min="0" size="10"></td></tr>
+        <tr><td> </td><td> </td></tr>
+        <tr><td><input type="button" value="Add Sale" onclick="addSaleInfo()"></td><td> </td></tr>
+      </table>
+      <br />
+      <table cellpadding="3" cellspacing="1" id="result" style="display:none">
+        <thead>
+        <tr><th>Sale</th><th>Sale Amount</th><th>Comission</th><th>Subtotal</th></tr>
+        </thead>
+        <tbody id="rows">
+        </tbody>
+      </table>
+  </body>
+</html>

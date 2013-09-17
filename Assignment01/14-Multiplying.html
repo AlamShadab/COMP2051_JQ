@@ -1,0 +1,28 @@
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=windows-1250">
+  <title>Employee salary</title>
+  </head>
+  <script type="text/javascript" >
+    function cube(){
+	    var result;
+	    result = parseFloat(document.getElementById("m1").value)*parseFloat(document.getElementById("m2").value)*parseFloat(document.getElementById("m3").value);
+	    if (result != NaN){
+	      document.getElementById("cellResult").childNodes[0].textContent = result;
+	    }else{
+	      alert("Please review your entries. At least one is not a valid number.");
+	    }
+    }
+  </script>
+</script>
+  <body>
+    <form id="frmCube" method="post">
+      <table cellpadding="3" cellspacing="1">
+        <tr><td>Multiplier 1</td><td><input type="number" id="m1" value="0"></td></tr>
+        <tr><td>Multiplier 2</td><td><input type="number" id="m2" value="0"></td></tr>
+        <tr><td>Multiplier 3</td><td><input type="number" id="m3" value="0"></td></tr>
+        <tr><td><input type="button" value="Result" onclick="cube()"></td><td id="cellResult"> </td></tr>
+      </table>
+    </form>
+  </body>
+</html>
