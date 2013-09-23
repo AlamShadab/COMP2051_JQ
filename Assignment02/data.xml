@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<company>
+<employee id="1" hours="40" rate_pay="22.25">Premshree Pillai</employee>
+<employee id="2" hours="55" rate_pay="27.35">Kumar Singh</employee>
+<employee id="3" hours="43" rate_pay="19.76">Ranjit Kapoor</employee>
+<employee id="4" hours="35" rate_pay="20.03">Jorge Quiroga</employee>
+<employee id="5" hours="65" rate_pay="31.02">Pedro Cuervo</employee>
+<employee id="6" hours="12" rate_pay="21.05">Laurinda Kok</employee>
+</company>

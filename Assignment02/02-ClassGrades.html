@@ -1,0 +1,32 @@
+<!--  Develop a class-averaging program that will process an arbitrary number of grades each time the
+program is run.
+-->
+<html>
+  <head>
+     <title>Course Grade</title>
+     <meta  charset="utf-8">
+     <script type="text/javascript" >
+          function calculateGrades(){
+             var currentGrade = 0;
+             var acum = 0;
+             var counter = 0;
+             do{
+               do{
+                 currentGrade = parseFloat(prompt("Please type the grade or '0' to exit", ""));
+               }while(isNaN(currentGrade));
+               if (currentGrade > 0){
+                 acum += currentGrade;
+                 counter++;
+               }
+             }while(currentGrade > 0);
+             alert("The average of the class is:"+parseFloat(acum/counter).toFixed(2));
+          }
+     </script>     
+</head>
+<body>
+  <h1> Welcome to the program to calculate the average of a course with an unknown number of students</h1>
+  <hr>
+  <p>Please push the button below and start to enter the grades of the class.</p>
+  <button onclick="calculateGrades()">Capture the grades</button>
+</body>
+</html>

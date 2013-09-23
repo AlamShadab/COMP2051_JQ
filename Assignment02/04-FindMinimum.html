@@ -1,0 +1,42 @@
+<!--
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+
+4) Write a script that finds the smallest of several non-negative integers. Assume that the first value read
+  specifies the number of values to be input from the user.
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Course Grade</title>
+    <script type="text/javascript">
+          function findMinimum(){
+            var numEntries = 0;
+            var minimum;
+             do{
+               numEntries = parseInt(prompt("Please type the number of entries", ""));
+             }while(isNaN(numEntries));
+             
+             for (var i=0; i<numEntries; i++){
+               do {
+	               current = parseInt(prompt("Please type a valid positive integer", ""));
+               }while(isNaN(current) && current < 0);
+               if (minimum == undefined || minimum > current){
+                 minimum = current;
+               }
+             }
+             alert("The minimum integer typed was "+minimum);
+          }
+     </script>
+  </head>
+  <body>
+    <h1> Welcome to the program to find the minimum number among typed by the
+      user</h1>
+    <hr>
+    <p>Please push the button below and start to enter the required information.</p>
+    <button onclick="findMinimum()">Find the minimum</button>
+  </body>
+</html>

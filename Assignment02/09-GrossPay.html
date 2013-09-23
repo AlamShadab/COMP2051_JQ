@@ -1,0 +1,126 @@
+<!-- 
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+9) Develop a script that will determine the gross pay for each of three employees. The company pays “straight time” for the first 40 hours worked by each employee and pays “time and a half” for all hours worked in excess of 40 hours. You’re given a list of the employees of the company, the number of hours each employee worked last week, and the hourly rate of each employee. Your script should input this information for each employee, determine the employee’s gross pay and output HTML5 text that displays the employee’s gross pay. Use prompt dialogs to input the data. Some sample data:
+Employee number		Number of Hours Worked Last week 	Hourly Rate For Each Employee
+1						40									22.25
+2 						55							 		27.35
+3 						43 									19.76
+4 						35 									20.03
+5 						61									31.02
+6 						12 									21.05
+Challenge (coming later but you can attempt): Can you put the information in a JSON or XML file, have your program read that file, and then print the resulting data. What if this info was in a DB … AJAX
+
+-->
+
+<html>
+<head>
+	<title>Gross pay</title>
+	<script type="text/javascript">
+	var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+	var data;
+	var employeesData = new Array(); 
+	function employee(id, name, hours, rate_pay)
+	{
+		this.id = id;
+		this.name = name;
+		this.hours = hours;
+		this.rate_pay = rate_pay;
+		this.salary = 0;
+	}
+	function loadXML(xmlFile)
+	{
+		xmlDoc.async="false";
+		//xmlDoc.onreadystatechange=verify;
+		xmlDoc.load(xmlFile);
+		xmlObj=xmlDoc.documentElement;
+		data = xmlDoc.documentElement;
+
+		for (i = 0; i < data.childNodes.length; i++){
+			id = data.childNodes(i).getAttribute('id');
+			name = data.childNodes(i).text;
+			hours = data.childNodes(i).getAttribute('hours');
+			rate_pay = data.childNodes(i).getAttribute('rate_pay');
+			employeesData[i] = new employee(id, name, hours, rate_pay);
+			calculateSalary(employeesData[i]);
+		}
+	}
+	function calculateSalary(employee) 
+	{
+		if (employee.hours > 40) //d. If hours over 40, then the hours minus 40 should have a rate of time and a half added to the total 40 * rate.
+		{
+			employee.overtime_rate = 1.5;
+			employee.overtime = employee.hours - 40;
+			employee.overtime_due = employee.overtime * employee.overtime_rate;
+			employee.salary = employee.overtime_due + (40 * employee.rate_pay); // Calculate the total dollars owed
+		}
+		else // The employee has not worked more than 40 hours a week
+		{
+			employee.salary = employee.hours * employee.rate_pay; // Calculate the total dollars owed
+		}
+	}
+
+	function calculateGrossPayForOneEmployee() // Create a new payroll function
+	{
+		employee = new Object(); // Create a new object called employee 1
+		//a. Take in employee name.
+		employee.identity = prompt("Please enter the name of this employee: ", "");
+		//b. Take in employee rate pay.
+		employee.rate_pay = parseFloat(prompt("Employee's rate pay: ", ""));
+		//c. Take in employee hours worked that week.
+		employee.hours = parseFloat(prompt("Hours worked this week: ", ""));
+
+		calculateSalary(employee)
+		
+		//e. Print results.
+		document.write("Gross pay for " + employee.identity + ", is <b>" + employee.salary + "</b> dollars!")
+		document.write("<br/>Rate pay: <b>" + employee.rate_pay + "</b>");
+		document.write("<br/>Hours worked: <b>" + employee.hours + "</b><br/><br/>");
+	}
+	function payroll() // Create a new payroll function
+	{
+		//Repeat until all employees are added.
+		var addEmployee = 'Y';
+		while (addEmployee == "Y")
+		{
+			calculateGrossPayForOneEmployee()
+			addEmployee = prompt("Add an Employee? ", "Y");
+		}
+	}
+
+	function payrollFromXMLFile() // Create a new payroll function
+	{
+		
+		loadXML('data.xml');
+
+		document.write('<table width = "40%" border = "0">'); // Create the table
+		document.write('<tr>');
+		document.write('<th align="left" width = "20">' + 'ID' + '</td>');
+		document.write('<th align="left" width = "30">' + 'Employee' + '</td>');
+		document.write('<th align="left" width = "150">' + 'Hours Worked' + '</td>');
+		document.write('<th align="left" width = "50">' + 'Wage' + '</td>');
+		document.write('<th align="center" width = "50">' + 'Total' + '</td>');
+		document.write('</td>');
+		for (i = 0; i < data.childNodes.length; i++){
+			document.write('<tr>');
+			document.write('<td>' + employeesData[i].id + '</td>');
+			document.write('<td>' + employeesData[i].name + '</td>');
+			document.write('<td>' + employeesData[i].hours + '</td>');
+			document.write('<td>' + employeesData[i].rate_pay + '</td>');
+			document.write('<td align="right"><b>' + employeesData[i].salary.toFixed(2) + '</b></td>');
+			document.write('</tr>');
+		}
+	}
+	</script>
+</head>
+<body>
+	<h1>Gross pay program</h1>
+	<h2>Please click the button when you want to calculate payroll!</h2>
+	<h3>Note: employees accrue overtime after they have worked 40 hours in one week!</h3>
+	<input type="button" value="Payroll calculator READ FROM XML FILE" onclick="payrollFromXMLFile()" />
+	<input type="button" value="Payroll calculator" onclick="payroll()" />
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!--
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+8) A large company pays its salespeople on a commission basis. The salespeople receive $200 per week,
+ plus 9 percent of their gross sales for the week. For example, a salesperson who sells $5000 worth of
+ merchandise in a week receives $200 plus 9 percent of $5,000, or a total of $650.
+ You have been supplied with a list of the items sold by each salesperson. The value of these items
+ are as follows:
+Item Value
+1    239.99
+2    129.75
+3     99.95
+4    350.89
+Develop a script that inputs one salesperson’s items sold for last week, calculates the salesperson’s
+earnings, and outputs HTML5 text that displays the salesperson’s earnings.
+-->
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Salesperson Payment</title>
+	<script type="text/javascript" >
+     var arrPrices = new Array(239.99, 129.75, 99.95, 350.89);
+     var base = 200;
+     
+     function calculateGrossPayment(){
+       var acum = 0;
+       var currItem;
+       for (var i=0; i<arrPrices.length; i++){
+         do {
+	         currItem = parseFloat(prompt("Please type the number of items code "+(i+1)+"sold.",""));
+         }while(isNaN(currItem));
+         acum += currItem*arrPrices[i];
+       }
+       document.getElementById("output").innerHTML="The sales person sold $ "+parseFloat(acum).toFixed(2).toString()+".<br>"+
+         "Base payment: $"+parseFloat(base).toFixed(2)+"<br> Comission: $"+parseFloat(acum*0.09).toFixed(2)+"<br> Total Payment: $"+parseFloat(base+acum*(0.09)).toFixed(2)+"<br>";
+     }
+   </script>
+</head>
+<body>
+<h1>Welcome to the program to calculate the payment of a sales person during the week.</h1>
+<hr>
+<p>Click the button to start to enter the information for a sales employee.</p>
+<div><input type="button" value="Enter Item codes" onclick="calculateGrossPayment();"></div>
+<hr>
+<h3 id="output">
+</h3>
+</body>
+</html>

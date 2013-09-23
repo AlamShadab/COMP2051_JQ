@@ -1,0 +1,39 @@
+<!-- 
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+1) A class of ten students took a quiz. The grades (integers in the range 0 to 100) for this quiz are available to you. Determine the class average on the quiz.
+-->
+
+<html>
+<head>
+	<meta charset = "utf-8">
+	<script ="text/javacript">
+        var grades = [90,30,80,67,91,45,67,78,50,77] // Create an empty array to hold the grades
+        var counter = 0; // Create a new counter
+        var total = 0 // Create a new total variable
+
+        document.writeln("Welcome to the grade entry program!")
+        
+        for (var i = 0; i < grades.length; i++) { // Loop through each of the elements in the array
+            var total = total + grades[i]; // Add each array element to the total
+        }
+
+        var average = total / grades.length; // Calculate the average for the variables that are entered
+
+        document.writeln("<br>A total of " + grades.length + " students wrote the quiz that you created! \
+			<br> The average grade for the quiz is <b>" + average.toFixed(2) + "</b>.<br><br>")
+        document.writeln("The following are the students grades:");
+        for (var i = 0; i < grades.length; i++)
+            if (grades[i] < 60)
+                document.writeln("<br> Student " + (i + 1) + " got: <font color='#ff0000'>" + grades[i] + "</font>");
+            else
+                document.writeln("<br> Student " + (i + 1) + " got: " + grades[i]);
+    </script>
+</head>
+<body>
+	<!-- There is no body section here --> 
+</body>
+</html>

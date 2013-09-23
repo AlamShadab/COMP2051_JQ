@@ -1,0 +1,65 @@
+<!--
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+14) A person invests $1000.00 in a savings account yielding 5 percent interest.
+  Assuming that all the interest is left on deposit, calculate and print the amount
+  of money in the account at the end of each year for 10 years. Use the following
+  formula to determine the amounts:
+    a. a = p * (1 + r)n where p is the original amount invested (i.e., the principal),
+         r is the annual interest rate, n is the number of years, a is the amount on
+         deposit at the end of the nth year.
+    b. Create a program which puts the value of the amount on deposit every year
+       for the next 10 years, as well as the count of the year, in a table.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Interest Table</title>
+<script type="text/javascript">
+  function interestTable(){
+    var interest=0.05;
+    var numYears=10;
+    var invest = 0;
+    
+    do{
+      invest = prompt("Type the amount to invest","");
+    }while (parseFloat(invest) == NaN);
+    
+    invest = parseFloat(invest);
+
+    do{
+      interest = prompt("Type the annual interest please","5");
+    }while (parseFloat(interest) == NaN);
+    
+    interest = parseFloat(interest)/100;
+    
+    do{
+      numYears = prompt("Type the number of years ","10");
+    }while (parseInt(numYears) == NaN);
+    
+    numYears = parseInt(numYears);
+    var strTable = "<table cellspacing='1' cellpadding='3'><tr><th>Year</th><th>Amount On Deposit</th></tr>";
+
+    for(var i = 1; i<= numYears; i++){
+      strTable += "<tr><td style='text-align:center'>"+i+"</td><td style='text-align:right'> $ "+parseFloat(invest*Math.pow((1+interest),i)).toFixed(2)+"</td></tr>";      
+    }
+    strTable += "</table>";
+    
+    document.getElementById("output").innerHTML = strTable;
+  }
+</script>
+</head>
+<body>
+  <h1>Welcome to the program that calculates the amount of money in the account.</h1>
+  <hr>
+  <p>Click the button and type the values to calculate the amount in the account at the end of each year.</p>
+  <div><input type="button" value="Calculate" onclick="interestTable();"></div>
+  <hr>
+  <div id="output">
+  </div>
+</body>
+</html>

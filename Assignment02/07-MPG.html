@@ -1,0 +1,75 @@
+<!-- 
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+7) Drivers are concerned with the mileage obtained by their automobiles. 
+One driver has kept track of several tankfuls of gasolie by recording the number of miles driven and the number of gallons used for each thankful. 
+Develop a script that will take as input the miles driven and gallons used (both as integers), for each thankful. 
+The script should calculate and output HTML5 text that displays the number of miles per gallon 
+obtained for each thankful and prints the combined number of miles per gallon obtained for all tankfuls up to this point. 
+Use prompt dialogs to obtain the data from the users. 
+Use your own made-up data to solve the problem.
+
+-->
+
+<html>
+<head>
+	<meta charset = "utf-8">
+	<title>Average Miles Per Gallon</title>
+	<script type="text/javascript">
+		var data = new Array();
+		function thankful(gallons, miles)
+		{
+			this.miles = miles;
+			this.gallons = gallons;
+		}
+	    function Init(){
+			// Use your own made-up data to solve the problem.
+			getData();
+			calculateAverage();
+	    }
+
+		function getData()
+		{
+			var currentTank = 0;
+			while (gallons != "0")
+			{
+				var gallons = parseInt(prompt("Please enter the number of gallons or enter '0' when you are finished:",""));
+				if (gallons > 0)
+				{				
+					var miles = parseInt(prompt("Please enter the number of miles:",""));
+					data[currentTank] = new thankful(gallons, miles);
+					currentTank ++;
+				}
+			}
+		}
+
+		function calculateAverage(){
+			var totGallons = 0;
+			var totMiles = 0;
+			document.write('<table width = "40%" border = "0">'); // Create the table
+			document.write('<tr>');
+			document.write('<th align="left" width = "35">' + 'Miles' + '</td>');
+			document.write('<th align="left" width = "35">' + 'Gallons' + '</td>');
+			document.write('<th align="left" width = "35">' + 'MPG' + '</td>');
+			document.write('</td>');
+
+			for (var u=0; u < data.length; u++){
+				document.write('<tr>');
+				document.write('<td>' + data[u].gallons + '</td>');
+				document.write('<td>' + data[u].miles + '</td>');
+				document.write('<td>' + parseFloat(data[u].miles/data[u].gallons).toFixed(2) + '</td>');
+				document.write('</tr>');
+				totGallons += data[u].gallons;
+				totMiles += data[u].miles;
+			}
+			document.write('</table><br/><br/>Total average: <b>' + parseFloat(totMiles/totGallons).toFixed(2) + "</b> miles per gallon");
+		}
+
+	  </script>
+  </head>
+  <body onload="Init()">
+  </body>
+</html>

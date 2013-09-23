@@ -1,0 +1,69 @@
+<!--
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+12) A company wants to transmit data over the telephone, but it is concerned that its
+  phones may be tapped. All of its data is transmitted as four-digit integers. It has
+  asked you to write a program that will encrypt its data so that the data may be
+  transmitted more securely.
+  Your script should read a four-digit integer entered by the user in a prompt dialog
+  and encrypt it as follows: Replace each digit by (the sum of that digit plus 7)
+  modulus 10. Then swap the first digit with the third, and swap the second digit
+  with the fourth. Then output text that displays the encrypted integer. Once this is
+  done, write a program that inputs an encrypted four-digit integer and decrypts it
+  to form the original number.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Encrypter/Decrypter</title>
+<script type="text/javascript">
+  function encryptNumber(){
+    var input;
+    
+    do{
+      input = prompt("Enter the number to be encrypted (four digits please; otherwise nothing will be encrypted)", "");
+    }while(isNaN(input));
+    
+    if (input.length == 4){
+      input = String(input);
+      var encrypted = "";
+      var digits = new Array(4);
+      for (var i=0; i<4; i++){
+        digits[i] = ((parseInt(input[i])+7) % 10);
+      }
+      input = String(digits[2])+String(digits[3])+String(digits[0])+String(digits[1]);
+      alert("Encrypted value:"+input);
+    }
+  }
+  
+  function decryptNumber(){
+    var input;
+    
+    do{
+      input = prompt("Enter the number to be decrypted (four digits please; otherwise nothing will be decrypted)", "");
+    }while(isNaN(input));
+    
+    if (input.length == 4){
+      var decrypted = "";
+      var digits = new Array(4);
+      for (var i=0; i<4; i++){
+        digits[i] = ((parseInt(input[i])+3) % 10);
+      }
+      input = String(digits[2])+String(digits[3])+String(digits[0])+String(digits[1]);
+      alert("Decrypted value:"+input);
+    }
+  }
+</script>
+</head>
+<body>
+<h1>Welcome to the program that encrypt/decrypt a number of four digits.</h1>
+<hr>
+<p>Click the button to start to enter the numbers to be encrypted or decrypted. Type a letter to finish.</p>
+<div><input type="button" value="Encrypt number" onclick="encryptNumber();">&nbsp;<input type="button" value="Desencrypt number" onclick="decryptNumber();"></div>
+<hr>
+</body>
+</html>

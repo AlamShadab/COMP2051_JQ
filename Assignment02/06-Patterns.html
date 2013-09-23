@@ -1,0 +1,78 @@
+<!--
+Sept 25 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+
+6) Write a script that outputs XHTML to display the given patterns separately, one below the other. Use for
+statements to generate the patterns. All asterisks (*) should be printed by a single statement of the form
+document.write( "*" ); (this causes the asterisks to print side by side). A statement of the form
+document.writeln( "<br />" ); can be used to position to the next line. A statement of the form
+document.write( " " ); can be used to
+display a space (needed for the last two
+patterns). There should be no other output
+statements in the program. [Hint: The last
+two patterns require that each line begin
+with an appropriate number of blanks. You
+may need to use the XHTML <pre></pre>
+tags.]
+-->
+<?xml version="1.0" encoding="UTF-8"?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Painting Patterns</title>
+    <script type="text/javascript">
+        var maxLength = 10;
+        function paintRightTriangles(){
+          for (var i=1; i<=maxLength; i++) {
+            for (var u=1; u<=i; u++){
+              document.write("*");
+            }
+            document.write("<br>");
+          }
+          for (var i=1; i<=maxLength; i++) {
+            for (var u=1; u<=maxLength; u++){
+              if (u<i){
+                document.write("&nbsp;");
+              }else{
+                document.write("*");
+              }
+            }
+            document.write("<br>");
+          }
+          for (var i=1; i<=maxLength; i++) {
+            for (var u=1; u<=maxLength; u++){
+              if(u<i){
+                document.write("&nbsp;");
+              }else{
+                document.write("*");
+              }
+            }
+            document.write("<br>");
+          }
+          for (var i=1; i<=maxLength; i++) {
+            for (var u=1; u<=maxLength; u++){
+              if (u<=(10-i)){
+                document.write("&nbsp");
+              }else{
+                document.write("*");
+              }
+            }
+            document.write("<br>");
+          }
+        }
+     </script>
+  </head>
+  <body style="font-family:monospace">
+    <h1> Welcome to the program to paint right triangles with asterisks</h1>
+    <hr>
+    <script type="text/javascript" >
+      paintRightTriangles();
+//      paintRightTriangle(false, false);
+//      paintRightTriangle(true, true);
+//             paintRightTriangle(true, false);
+   </script>
+  </body>
+</html>
