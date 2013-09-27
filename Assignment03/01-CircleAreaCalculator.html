@@ -1,0 +1,28 @@
+<!--
+     
+   
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Circle Area</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript">
+    function circleArea(){
+      var radius = 0;
+      do{
+        radius = parseFloat(prompt("Please,enter the circle radius",""));
+      }while(isNaN(radius));
+      alert("The circle area is "+parseFloat(Math.PI*Math.pow(radius,2)).toFixed(2));
+    }
+  </script>
+</head>
+<body>
+  <h2>Please click on the button and type the circle's radius</h2>
+  <hr>
+  <button onclick="circleArea()">Calculate</button>
+	
+</body>
+
+</html>

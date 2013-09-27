@@ -1,0 +1,40 @@
+<!--
+     
+   
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Distance Calculator</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript">
+    var P1={
+      x:0,
+      y:0
+    }
+    
+    var P2={
+      x:0,
+      y:0
+    }
+
+    function distance(){
+      var distance = Math.sqrt(Math.pow(P2.x-P1.x, 2)+Math.pow(P2.y-P1.y, 2));
+      document.getElementById("result").textContent = distance;
+    }
+  </script>
+</head>
+<body>
+  <h2>Please click on the button and type the circle's radius</h2>
+  <hr>
+  <div>
+    Point 1 coordinates: x <input id="x1" value="0" size="7" onblur="javascript:P1.x=parseFloat(this.value)">, y <input id="y1" value="0" size="7" onblur="javascript:P1.y=parseFloat(this.value)"><br/>
+    Point 2 coordinates: x <input id="x2" value="0" size="7" onblur="javascript:P2.x=parseFloat(this.value)">, y <input id="y2" value="0" size="7" onblur="javascript:P2.y=parseFloat(this.value)"><br/>
+    <span id="result"> </span>
+  </div>
+  <hr>
+  <button onclick="distance()">Calculate</button>	
+</body>
+
+</html>
