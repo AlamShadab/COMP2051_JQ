@@ -1,0 +1,51 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+4) Write a function integerPower( base, exponent ) that returns the value of base exponent For example, integerPower( 3, 4 ) = 3 * 3 * 3 * 3. Assume that exponent and base are integers. Function integerPower should use a for or while statement to control the calculation. Incorporate this function into a script that reads integer values from an XHTML form for base and exponent and performs the calculation with the integerPower function. The XHTML form should consist of two text fields and a button to initiate the calculation. The user should interact with the program by typing numbers in both text fields then clicking the button.
+-->
+<html>
+	<head>
+		<title>Course Grade</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+			function integerPower(base, exponent){
+				var total = 1;
+				for (var i=1; i<=exponent; i++) // Create the JavaScript loop that runs through the various jS headers (1 through exponent)
+				{
+					total *= base;
+				}
+				return total;
+          }
+		  function doCalculation(){
+				var base = parseInt(document.getElementById("base").value);
+				var exponent = parseInt(document.getElementById("exponent").value);
+				document.getElementById("result").innerHTML = integerPower(base, exponent);
+		  }
+
+     </script>     
+</head>
+<body>
+  <h1> Welcome to the program to calculate the value of base exponent</h1>
+  <hr>
+  <p>
+  <table>
+	<tr>
+		<td>Base:</td>
+		<td><input type="text" id="base"></td>
+	</tr>
+	<tr>
+		<td>Exponent:</td>
+		<td><input type="text" id="exponent"></td>
+	</tr>
+	<tr>
+		<td>Result:</td>
+		<td><b><label id="result"></b></td>
+	</tr>
+	</table>
+  </p>
+  <button onclick="doCalculation()">Calculate</button>
+</body>
+</html>

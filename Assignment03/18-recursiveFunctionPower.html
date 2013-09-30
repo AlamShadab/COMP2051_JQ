@@ -1,0 +1,63 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+18) Write a recursive function power( base, exponent ) that, when invoked, returns base exponent for example, power( 3, 4 ) = 3 * 3 * 3 * 3. Assume that exponent is an integer greater than or equal to 1. The recursion step would use the relationship:
+baseexponent = base · base exponent –1
+and the terminating condition occurs when exponent is equal to 1, because base1 = base Incorporate this function into a script that enables the user to enter the base and exponent.
+a. It is interesting to watch recursion in action. Modify the factorial function above to display its local variable and recursive-call parameter. For each recursive call, display the outputs on a separate line and add a level of indentation. Do your utmost to make the outputs clear, interesting and meaningful. Your goal here is to design and implement an output format that helps a person understand recursion better. You may want to add such display capabilities to the many other recursion examples and exercises throughout the text.
+
+-->
+<html>
+	<head>
+		<title>Course Grade</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+			var iteration = 0;
+			function power(base, exponent){
+				iteration++;
+				document.getElementById("process").innerHTML += "<br>Iteration " + iteration.toString() + ": power(" + base.toString() + ", " + exponent.toString() + ") = ";
+				if (exponent == 1)
+				{
+					document.getElementById("process").innerHTML += base.toString();
+					return base;
+				}
+				else
+				{
+					exponent--;
+					document.getElementById("process").innerHTML += base.toString() + " * power(" + base.toString() + ", " + exponent.toString() + ")";
+					return base * power(base, exponent)
+				}
+			}
+			function doCalculation(){
+				var base = parseInt(document.getElementById("base").value);
+				var exponent = parseInt(document.getElementById("exponent").value);
+				document.getElementById("result").innerHTML = power(base, exponent);
+			}
+		</script>     
+	</head>
+<body>
+  <h1> Welcome to the program to calculate the value of base exponent</h1>
+  <hr>
+  <p>
+  <table>
+	<tr>
+		<td>Base:</td>
+		<td><input type="text" id="base"></td>
+	</tr>
+	<tr>
+		<td>Exponent:</td>
+		<td><input type="text" id="exponent"></td>
+	</tr>
+	<tr>
+		<td>Result:</td>
+		<td><b><label id="result"></b></td>
+	</tr>
+	</table>
+  </p>
+  <button onclick="doCalculation()">Calculate</button><br/><br/>
+  <label id="process">
+</body>
+</html>

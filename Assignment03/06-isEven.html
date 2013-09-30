@@ -1,0 +1,33 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+6) Write a script that inputs integers (one at a time) and passes them one at a time to function isEven, which uses the modulus operator to determine whether an integer is even. The function should take an integer argument and return true if the integer is even and false otherwise. Use sentinel-controlled looping and a prompt dialog.
+-->
+<html>
+  <head>
+     <title>Is Even</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+
+	    function Init(){
+			while (number != "0") //Use sentinel-controlled looping and a prompt dialog.
+			{
+				var number = parseInt(prompt("Please enter the number or enter '0' when you are finished:",""));
+				if (isEven(number))
+					alert(number.toString() + " is even");
+				else
+					alert(number.toString() + " is NOT even");
+				
+			}
+	    }
+		function isEven(number){
+				var even = number % 2 == 0;
+				return even;
+          }
+     </script>
+</head>
+<body onload="Init()">
+</html>

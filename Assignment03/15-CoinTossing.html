@@ -1,0 +1,53 @@
+<!--
+Sept 28 2013
+Assignment 3
+Authors:	Jorge E. Quiroga	A00824194
+         Jorge H. Rodriguez	A00541611
+			
+15) Write a script that simulates coin tossing. Let the program toss the coin each time the user clicks the
+Toss button. Count the number of times each side of the coin appears. Display the results. The program
+should call a separate function flip that takes no arguments and returns false for tails and true for heads.
+[Note: If the program realistically simulates the coin tossing, each side of the coin should appear
+approximately half the time.]
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Coin Tossing</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript">
+    var arrNumberOfEvents = new Array(0,0);
+    function flip(){
+      coinValue = Math.floor(2*Math.random());
+      arrNumberOfEvents[coinValue]++;
+      coinValue++;
+      if (coinValue % 2 == 0){
+        alert("Coin shows head");
+      }else {
+	     alert("Coin shows tail");
+      }
+    }
+    
+    function showHistogram(){
+      var strHTML = "";
+      for (var i=1; i<=2; i++){
+        if (i == 1)
+          strHTML += "Coin tails have appeared "+arrNumberOfEvents[i-1]+" times <br/>";
+        else{
+          strHTML += "Coin heads have appeared "+arrNumberOfEvents[i-1]+" times <br/>";
+        }
+      }
+      document.getElementById("histogram").innerHTML = strHTML;
+    }
+  </script>
+</head>
+<body>
+  <h2>Please click on the button to toss the coin</h2>
+  <hr>
+  <button onclick="flip()">Toss Coin!</button>&nbsp;  <button onclick="showHistogram()">See event frequency</button>
+  <hr>
+  <div id="histogram">
+  </div>
+</body>
+</html>

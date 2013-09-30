@@ -1,0 +1,56 @@
+<!--
+Sept 28 2013
+Assignment 3
+Authors:	Jorge E. Quiroga	A00824194
+         Jorge H. Rodriguez	A00541611
+			
+17) Write a script that plays a “guess the number” game as follows: Your program chooses the number to be
+guessed by selecting a random integer in the range 1 to 1000. The script displays the prompt Guess a
+number between 1 and 1000 next to a text field. The player types a first guess into the text field and
+clicks a button to submit the guess to the script. If the player's guess is incorrect, your program should
+display Too high. Try again. or Too low. Try again. to help the player “zero in” on the correct answer and
+should clear the text field so the user can enter the next guess. When the user enters the correct
+answer, display Congratulations. You guessed the number! and clear the text field so the user can play
+again. [Note: The guessing technique employed in this problem is similar to a binary search, which we
+discuss in Chapter 10, JavaScript: Arrays.]
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Guess the Number!</title>
+<script type="text/javascript">
+  var number = generateNewValue();
+  
+  function generateNewValue(){
+    return Math.floor(1000*Math.random())+1;
+  }
+  
+  function guess(){
+    if (document.getElementById("playerNumber").value == undefined || document.getElementById("playerNumber").value.trim() == "" || isNaN(document.getElementById("playerNumber").value)){
+      alert("Please type a number");
+      document.getElementById("playerNumber").focus();
+      return false;
+    }
+    if (parseInt(document.getElementById("playerNumber").value) > number){
+      alert("Too high\n\nTry again.");
+    }else if (parseInt(document.getElementById("playerNumber").value) < number){
+      alert("Too low\n\nTry again.");
+    }else{
+      alert("Congratulations!!\n\nYou guessed the number.");
+      number = generateNewValue();
+    }
+    document.getElementById("playerNumber").value = "";
+    document.getElementById("playerNumber").focus();
+  }
+</script>
+</head>
+<body>
+  <h2>Guess the number between 1 and 1000!!</h2>
+  <hr>
+  <div id="histogram">
+    <label for="playerNumber" accesskey="n">Type a number</label> <input type="number" id="playerNumber" value="" size="10"><br/>
+    <button onclick="guess()">This is my guess</button>
+  </div>
+</body>
+</html>

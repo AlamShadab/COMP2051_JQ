@@ -1,0 +1,135 @@
+<!--
+Sept 28 2013
+Assignment 3
+Authors:	Jorge E. Quiroga	A00824194
+         Jorge H. Rodriguez	A00541611
+			
+11) An integer number is said to be a perfect number if its factors, including 1 (but not the number itself),
+sum to the number. For example, 6 is a perfect number, because 6 = 1 + 2 + 3.Write a function perfect
+that determines whether parameter number is a perfect number. Use this function in a script that
+determines and displays all the perfect numbers between 1 and 1000. Print the factors of each perfect
+number to confirm that the number is indeed perfect. Challenge the computing power of your computer
+by testing numbers much larger than 1000. Display the results in a <textarea>. An integer is said to be
+prime if it is greater than 1 and divisible only by 1 and itself. For example, 2, 3, 5 and 7 are prime, but 4,
+6, 8 and 9 are not.
+a. Write a function that determines whether a number is prime.
+b. Use this function in a script that determines and prints all the prime numbers between 1 and
+10,000. How many of these 10,000 numbers do you really have to test before being sure that
+you have found all the primes? Display the results in a <textarea>.
+2
+c.Initially, you might think that n/2 is the upper limit for which you must test to see whether a
+number is prime, but you only need go as high as the square root of n. Why? Rewrite the
+program using the Math.sqrt method to calculate the square root, and run it both ways.
+Estimate the performance improvement.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Perfect Numbers</title>
+<script type="text/javascript">
+  function isPrimeHalf(num){
+    for (var i=2; i<= Math.floor(num/2); i++){
+      if (num % i == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function isPrimeSquare(num){
+    for (var i=2; i<= Math.sqrt(num); i++){
+      if (num % i == 0){
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  function findPrimes(upperLimit){
+    var arrPrimes = new Array();
+    
+    for (var i=1; i<=upperLimit; i++){
+      if (isPrimeSquare(i)){
+        arrPrimes.push(i);
+      }
+    }
+    return arrPrimes;
+  }  
+  
+  function listPrimes(){
+    var upperLimit = parseInt(document.getElementById("primeLimit").value);
+    
+    if (isNaN(upperLimit)){
+      alert("Please type a valid integer number as a limit to find prime numbers");
+      document.getElementById("primeLimit").focus();
+    }
+    var strText = "";
+    var listPrimes = findPrimes(upperLimit);
+    for (var i=1; i<listPrimes.length; i++){
+      strText += " "+listPrimes[i];
+    }
+    document.getElementById("result").value = strText;
+  }
+  
+  function findDividers(number){
+    var arrDividers = new Array(); 
+    
+    for (var i=1; i<=Math.floor(number/2); i++){
+      if (number % i == 0){
+        arrDividers.push(i);
+      }
+    }
+    return arrDividers;
+  }  
+  
+/* the first slow version If I have time I do it using the Mersenne prime numbers */
+  function listPerfectNumbers(){
+    var upperLimit = parseInt(document.getElementById("perfect").value);
+    
+    if (isNaN(upperLimit)){
+      alert("Please type a valid integer number as a limit to find prime numbers");
+      document.getElementById("perfect").focus();
+    }
+    var strText = "";
+    var dividers;
+    var divSum = 0;
+    for (var i=1; i<=upperLimit; i++){
+      dividers = findDividers(i);
+      divSum = 0;
+      for (var j=0; j< dividers.length; j++){
+        divSum += dividers[j];
+      }
+      if (divSum == i){
+        strText += i+" is a perfect number because ";
+        for (var p=0; p< dividers.length; p++){
+          if (p == dividers.length -1){
+            strText += dividers[p] + " ";
+          }else{
+            strText += dividers[p] + " + "
+          }
+        }
+        strText += "= "+i+"\n";
+      }
+    }
+    document.getElementById("result").value = strText;
+  } 
+
+</script>
+</head>
+<body>
+  <h2>Please type a number below to know if it is a perfect number.</h2>
+  <hr>
+  <div><label for="perfect" accesskey="p">Find perfect numbers below: </label><input type="number" id="perfect" size="7"><br/>
+    <input type="button" value="List Perfect Numbers" onclick="listPerfectNumbers()">
+  </div>
+  <hr>
+  <div><label for="primeLimit" accesskey="p">Find prime numbers below: </label><input type="number" id="primeLimit" size="7"><br/>
+    <input type="button" value="List Prime Numbers" onclick="listPrimes()">&nbsp;
+  </div>
+  <hr>
+  <div>
+    <textarea id="result" rows="10" cols="80"> </textarea>
+  </div>
+</body>
+</html>

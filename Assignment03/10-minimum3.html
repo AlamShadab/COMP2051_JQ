@@ -1,0 +1,53 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+10) Write a function minimum3 that returns the smallest of three floating-point numbers. Use the Math.min function to implement minimum3. Incorporate the function into a script that reads three values from the user and determines the smallest value.
+
+-->
+<html>
+	<head>
+		<title>minimum of three floating-point numbers</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+			function minimum3(x, y, z){
+				var min = Math.min(x, y, z);
+				return min;
+          }
+		  function doCalculation(){
+				var x = parseFloat(document.getElementById("x").value);
+				var y = parseFloat(document.getElementById("y").value);
+				var z = parseFloat(document.getElementById("z").value);
+				document.getElementById("result").innerHTML = minimum3(x, y, z);
+		  }
+
+     </script>     
+</head>
+<body>
+  <h1> Welcome to the program to calculate the smallest of three floating-point numbers</h1>
+  <hr>
+  <p>
+  <table>
+	<tr>
+		<td>X:</td>
+		<td><input type="text" id="x"></td>
+	</tr>
+	<tr>
+		<td>Y:</td>
+		<td><input type="text" id="y"></td>
+	</tr>
+	<tr>
+		<td>Z:</td>
+		<td><input type="text" id="z"></td>
+	</tr>
+	<tr>
+		<td>Minimum value:</td>
+		<td><b><label id="result"></b></td>
+	</tr>
+	</table>
+  </p>
+  <button onclick="doCalculation()">Calculate</button>
+</body>
+</html>

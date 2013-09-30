@@ -1,0 +1,47 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+12) Write a function that takes an integer value and returns the number with its digits reversed. For example, given the number 7631, the function should return 1367. Incorporate the function into a script that reads a value from the user. Display the result of the function in the status bar.
+-->
+<html>
+	<head>
+		<title>Number with its digits reversed</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+			function reversed(number){
+				var str = number.toString();
+				var rev = "";
+				for (var i = str.length; i > 0; i--)
+				{
+					rev += str[i - 1];
+				}
+				return rev;
+          }
+		  function doCalculation(){
+				var number = parseInt(document.getElementById("number").value);
+				document.getElementById("result").innerHTML = reversed(number);
+				window.status = document.getElementById("result").innerHTML;	//Display the result of the function in the status bar.
+		  }
+
+     </script>     
+</head>
+<body>
+  <h1> Welcome to the program to calculate the reversed of a given number</h1>
+  <hr>
+  <p>
+  <table>
+	<tr>
+		<td>Number:</td>
+		<td><input type="text" id="number"></td>
+	</tr>
+	<tr>
+		<td>Number reversed:</td>
+		<td><b><label id="result"></b></td>
+	</tr>
+	</table>
+  </p>
+  <button onclick="doCalculation()">Calculate</button>
+</html>

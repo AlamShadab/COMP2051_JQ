@@ -1,0 +1,54 @@
+<!--
+Sept 28 2013
+Assignment 3
+Authors:	Jorge E. Quiroga	A00824194
+         Jorge H. Rodriguez	A00541611
+			
+9)Implement the following functions:
+a. Function celsius returns the Celsius equivalent of a Fahrenheit temperature, using the
+calculation C = 5.0 / 9.0 * ( F - 32 );
+b. Function fahrenheit returns the Fahrenheit equivalent of a Celsius temperature, using the
+calculation F = 9.0 / 5.0 * C + 32;
+Use these functions to write a script that enables the user to enter either a Fahrenheit or a Celsius
+temperature and displays the Celsius or Fahrenheit equivalent. Your XHTML document should contain two
+buttons—one to initiate the conversion from Fahrenheit to Celsius and one to initiate the conversion from
+Celsius to Fahrenheit.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Temperature converter</title>
+<script type="text/javascript">
+  function toCelsius(){
+    var result = 0;
+    if (isNaN(document.getElementById("temp").value)){
+      alert("Please type a valid number as temperature measure");
+      document.getElementById("temp").focus();
+      return false;
+    }
+    result = 5.0/9.0*(parseFloat(document.getElementById("temp").value)-32);
+    alert(document.getElementById("temp").value+"\xB0 Fahrenheit is equivalent to "+parseFloat(result).toFixed(2)+"\xB0 Celsius")
+  }
+  
+  function toFahrenheit(){
+    var result = 0;
+    if (isNaN(document.getElementById("temp").value)){
+      alert("Please type a valid number as temperature measure");
+      document.getElementById("temp").focus();
+      return false;
+    }
+    result = 9.0/5.0*(parseFloat(document.getElementById("temp").value)+32);
+    alert(document.getElementById("temp").value+"\xB0 Celsius is equivalent to "+parseFloat(result).toFixed(2)+"\xB0 Fahrenheit")
+  }
+</script>
+</head>
+<body>
+  <h2>Please type a temperature measure and push the correspondent button to convert it.</h2>
+  <hr>
+  <div><label for="temp" accesskey="t">Temperature measure: </label><input type="number" id="temp" size="7"></div>
+  <div id="result">
+   <input type="button" value="Convert To &deg;Celsius" onclick="toCelsius()">&nbsp;<input type="button" value="Convert To &deg;Fahrenheit" onclick="toFahrenheit()">
+  </div>
+</body>
+</html>

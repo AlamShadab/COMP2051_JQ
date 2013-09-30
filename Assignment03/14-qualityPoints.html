@@ -1,0 +1,52 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+14) Write a function qualityPoints that inputs a student's average and returns 4 if the student's average is 90–100, 3 if the average is 80–89, 2 if the average is 70–79, 1 if the average is 60–69 and 0 if the average is lower than 60. Incorporate the function into a script that reads a value from the user.
+
+-->
+<html>
+  <head>
+     <title>qualityPoints based on student's average</title>
+     <meta  charset="utf-8">
+     <script type="text/javascript" >
+          function qualityPoints(average){
+			var result; 
+			if ((average >= 90) && (average <= 100))
+				result = 4; //returns 4 if the student's average is 90–100
+			else
+			{
+				if ((average >= 80) && (average <= 89))
+					result = 3; //3 if the average is 80–89
+				else
+					if ((average >= 70) && (average <= 79))
+						result = 2;	//2 if the average is 70–79
+					else
+					{
+						if ((average >= 60) && (average <= 69))
+							result = 1; //1 if the average is 60–69
+						else
+							if (average < 60)
+								result = 0;	//0 if the average is lower than 60
+					}
+			}
+			return result;
+          }
+		  function doCalculation(){
+				var average = parseFloat(document.getElementById("average").value);
+				document.getElementById("result").innerHTML = qualityPoints(average);
+		  }
+     </script>     
+</head>
+<body>
+  <h1> Welcome to the program to calculate qualityPoints based on the student’s average</h1>
+  <hr>
+  <p>
+  Student's average:<input type="text" id="average"><br>
+  Quality Points: <b><label id="result"></b>
+	</p>
+  <button onclick="doCalculation()">calculate qualityPoints</button>
+</body>
+</html>

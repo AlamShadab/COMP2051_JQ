@@ -1,0 +1,76 @@
+<!--
+Sept 28 2013
+Assignment 3
+Authors:	Jorge E. Quiroga	A00824194
+         Jorge H. Rodriguez	A00541611
+			
+13) The greatest common divisor (GCD) of two integers is the largest integer that evenly divides each of the
+two numbers. Write a function gcd that returns the greatest common divisor of two integers.
+Incorporate the function into a script that reads two values from the user.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Greatest Common Divisor</title>
+<script type="text/javascript">
+    function findDividers(number){
+    var arrDividers = new Array(); 
+    
+    for (var i=1; i<=Math.floor(number/2); i++){
+      if (number % i == 0){
+        arrDividers.push(i);
+      }
+    }
+    arrDividers.push(number);
+    return arrDividers;
+  }  
+
+  function GCD(num1, num2){
+    var dividers1 = findDividers(num1);
+    var dividers2 = findDividers(num2);
+    
+    for (var i=(dividers1.length-1); i>=0; i--){
+      for (var j=(dividers2.length-1); j>=0; j--){
+        if (dividers1[i] == dividers2[j]){
+          return dividers2[j];
+        }
+      }
+    }
+    return 1;
+  }
+  
+  function findGDC(){
+    var num1, num2;
+    
+    if (isNaN(parseInt(document.getElementById('n1').value))){
+      alert("Please type a valid integer number for number 1");
+      document.getElementById('n1').focus();
+    }
+    num1 = parseInt(document.getElementById('n1').value);
+    
+    if (isNaN(parseInt(document.getElementById('n2').value))){
+      alert("Please type a valid integer number for number 2");
+      document.getElementById('n2').focus();
+    }
+    num2 = parseInt(document.getElementById('n2').value);
+    
+    document.getElementById("pnlResult").innerHTML = "The GCD between "+document.getElementById('n1').value+" and "+
+      document.getElementById('n2').value+" is "+GCD(num1, num2)+".";
+  }  
+</script>
+</head>
+<body>
+  <h2>Please type two numbers to find their greatest common divisor GCD.</h2>
+  <hr>
+  <div>
+    <label for="n1">Number 1: </label><input type="number" id="n1" size="7">&nbsp;
+    <label for="n2">Number 2: </label><input type="number" id="n2" size="7"><br/>
+    <input type="button" value="Find GCD" onclick="findGDC();">
+  </div>
+  <hr>
+  <div id="pnlResult">
+    
+  </div>
+</body>
+</html>

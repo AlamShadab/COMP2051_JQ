@@ -1,0 +1,80 @@
+<!--  
+Oct 01 2013
+Assignment 2
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+8) Write program segments that accomplish each of the following tasks:
+a. Calculate the integer part of the quotient when integer a is divided by integer
+b. Calculate the integer remainder when integer a is divided by integer b.
+Then, use the program pieces developed in parts (a) and (b) to write a function displayDigits that receives an integer between 1 and 99999 and prints it as a series of digits, each pair of which is separated by two spaces. For example, the integer 4562 should be printed as 4 5 6 2
+-->
+<html>
+  <head>
+		<title>Display digits of a given number</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+			function integerPartOfTheQuotient(dividend, divisor){
+				var q = Math.floor(dividend / divisor);
+				return q;
+			}
+			function integerPartOfTheRemainder(dividend, divisor){
+				var r = Math.round(((dividend / divisor) - Math.floor(dividend / divisor)) * divisor);
+				return r;
+			}
+			function displayDigits(number){
+				var str = "";
+				var q;
+				q = integerPartOfTheQuotient(number, 10000);
+
+				if (q > 0)
+				{
+					str += q.toString() + " ";
+					number = number - q * 10000;
+				}
+				q = integerPartOfTheQuotient(number, 1000);
+				if (q > 0)
+				{
+					str += q.toString() + " ";
+					number = number - q * 1000;
+				}
+				q = integerPartOfTheQuotient(number, 100);
+				if (q > 0)
+				{
+					str += q.toString() + " ";
+					number = number - q * 100;
+				}
+				q = integerPartOfTheQuotient(number, 10);
+				if (q > 0)
+				{
+					str += q.toString() + " ";
+					number = number - q * 10;
+				}
+				str += integerPartOfTheRemainder(number, 10);
+				return str;
+          }
+		  function doCalculation(){
+				var number = parseInt(document.getElementById("number").value);
+				document.getElementById("result").innerHTML = displayDigits(number);
+		  }
+
+     </script>     
+</head>
+<body>
+  <h1> Welcome to the program to calculate the digits of a given number</h1>
+  <hr>
+  <p>
+  <table>
+	<tr>
+		<td>Number (between 1 and 99999):</td>
+		<td><input type="text" id="number"></td>
+	</tr>
+	<tr>
+		<td>Digits:</td>
+		<td><b><label id="result"></b></td>
+	</tr>
+	</table>
+  </p>
+  <button onclick="doCalculation()">Calculate</button>
+</body>
+</html>

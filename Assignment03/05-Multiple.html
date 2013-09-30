@@ -1,0 +1,62 @@
+<!--
+Sept 28 2013
+Assignment 3
+Authors:	Jorge E. Quiroga	A00824194
+         Jorge H. Rodriguez	A00541611
+			
+5)Write a function multiple that determines, for a pair of integers, whether the second integer is a
+multiple of the first. The function should take two integer arguments and return true if the second is a
+multiple of the first, and false otherwise. Incorporate this function into a script that inputs a series of
+pairs of integers (one pair at a time). The XHTML form should consist of two text fields and a button to
+initiate the calculation. The user should interact with the program by typing numbers in both text fields,
+then clicking the button.
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Multiple</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript">
+    function multiple(){
+      var rest = 0;
+      var number1, number2;
+      
+      if (isNaN(document.getElementById("n1").value)){
+        alert("Please type a valid value for number 1");
+        document.getElementById("n1").focus();
+      }
+      if (isNaN(document.getElementById("n2").value)){
+        alert("Please type a valid value for number 2");
+        document.getElementById("n2").focus();
+      }
+      
+      number1 = parseFloat(document.getElementById("n1").value);
+      number2 = parseFloat(document.getElementById("n2").value); 
+      if (number2 < number1){
+        rest = number1;
+      }else{
+        rest = number2 % number1;
+      };
+      if (rest == 0){
+        document.getElementById("result").textContent = document.getElementById("n2").value+" is multiple of "+document.getElementById("n1").value;
+      }else {
+	     document.getElementById("result").textContent = document.getElementById("n2").value+" is not multiple of "+document.getElementById("n1").value;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h2>Please type two numbers and click on the button to know if the second is a multiple of the first one.</h2>
+  <hr>
+  <div>
+    Number 1: <input id="n1" value="0" size="7"><br/>
+    Number 2: <input id="n2" value="0" size="7"><br/>
+    <span id="result"> </span>
+  </div>
+  <hr>
+  <button onclick="multiple()">Calculate</button>	
+</body>
+
+</html>
