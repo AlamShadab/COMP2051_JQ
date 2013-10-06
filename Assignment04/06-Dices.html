@@ -1,0 +1,55 @@
+<!--
+Oct 05 2013
+Assignment 3
+Authors:    Jorge E. Quiroga    A00824194
+Jorge H. Rodriguez A00541611
+
+6)Write a script to simulate the rolling of two dice. The script should use Math.random to roll the first die
+and again to roll the second die. The sum of the two values should then be calculated. [Note: Since each
+die can show an integer value from 1 to 6, the sum of the values will vary from 2 to 12, with 7 being the
+most frequent sum, and 2 and 12 the least frequent sums. Your program should roll the dice 36,000
+times. Use a one-dimensional array to tally the numbers of times each possible sum appears. Display the
+results in an XHTML table. Also determine whether the totals are reasonable (e.g., there are six ways to
+roll a 7, so approximately 1/6 of all the rolls should be 7).]
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>06-Dices</title>
+        <script type="text/javascript">
+            var arrFreq = new Array(0,0,0,0,0,0,0,0,0,0,0);
+            
+            function totDices(){
+                var dice = Math.floor(Math.random()*6)+1;
+                dice += Math.floor(Math.random()*6)+1;
+                arrFreq[dice-2]++;
+            }
+
+            function launchDices(){
+                for (var i=0; i<36000; i++){
+                    totDices();
+                }
+                var strHTML = "";
+                for (var i=0; i<arrFreq.length; i++){
+                    strHTML += "Number "+String(parseInt(i)+2)+" has appeared "+arrFreq[i]+" times.<br/>";
+                }
+                document.getElementById("result").innerHTML = strHTML;
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h2>Launch the dices 36000 times and see the frequency of occurrence of each number.</h2>
+            </header>
+            <form>
+                <div>
+                    <input type="button" value="Start" onclick="launchDices()">
+                    &nbsp;
+                </div>
+            </form>
+        </div>
+        <div id="result"> </div>
+    </body>
+</html>

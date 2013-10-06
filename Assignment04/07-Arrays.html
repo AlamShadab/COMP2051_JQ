@@ -1,0 +1,196 @@
+<!--  
+Oct 09 2013
+Assignment 4
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+7) Write a script that runs 1000 games of craps and answers the following questions:
+a. How many games are won on the first roll, second roll,…, twentieth roll and after the twentieth roll?
+b. How many games are lost on the first roll, second roll, …, twentieth roll and after the twentieth roll?
+c. What are the chances of winning at craps? [Note: You should discover that craps is one of the fairest casino games. What do you suppose this means?]
+d. What is the average length of a game of craps?
+e. Do the chances of winning improve with the length of the game?
+
+-->
+<HTML>
+<HEAD>
+<title>Craps in JavaScript</title>
+	<script type="text/javascript">
+	 // State 0 = uninitialized state, need to select shooter.
+	 // State 1 = starting state.
+	 // State 2 = point state.
+	var shoot, state = 0, point, p1win = 0, p2win = 0, games = 0;
+	var wonPlayer1 = new Array(); // Create the new array
+	var wonPlayer2 = new Array(); // Create the new array
+	var count = 20;
+	for (i = 0; i < count; i++) // Create the for loop to loop through
+	{
+		wonPlayer1[i] = 0;
+		wonPlayer2[i] = 0;
+	};
+
+	function startgame() {
+		if (games<1000){
+			games++;
+			getshooter();
+			//message.value = "The selected shooter is " + shoot + ".";
+			state = 1;
+			rollcount = 0;
+			rolldice();
+		}
+		else
+			printResults();
+	}
+	function printResults() {
+		document.write("a. How many games are won on the first roll, second roll,…, twentieth roll and after the twentieth roll?<BR/>b. How many games are lost on the first roll, second roll, …, twentieth roll and after the twentieth roll?");
+		document.write("<table>");
+		document.write("<tr>");
+		document.write("<th>roll</th>");
+		document.write("<th># of wins</th>");
+		document.write("<th># of lost</th>");
+		document.write("<tr>");
+		//games are won on the first roll, second roll,…, twentieth roll and after the twentieth roll?
+		for (i = 0; i < count; i++){ // Create the for loop to loop through
+			document.write("<tr>");
+			if ((i + 1) == count)
+				document.write("<td> >=20 " + "</td>");
+			else
+				document.write("<td>" + (i + 1) + "</td>");
+			document.write("<td>" + wonPlayer1[i] + "</td>");
+			document.write("<td>" + wonPlayer2[i] + "</td>");
+			document.write("</tr>");
+		};
+		document.write("</table>");
+
+		document.write("<br/>c. What are the chances of winning at craps? [Note: You should discover that craps is one of the fairest casino games. What do you suppose this means?]");
+		document.write("<br/>Player 1 won " + p1win + " games (<b>" + ((100 * p1win) /(p1win + p2win)) + "%</b>)");
+		document.write("<br/>Player 2 won " + p2win + " games (<b>" + ((100 * p2win) /(p1win + p2win)) + "%</b>)");
+		document.write("<br/><br/>d. What is the average length of a game of craps?");
+		average = 0;
+		for (i = 0; i < count; i++){ // Create the for loop to loop through
+			average += (wonPlayer1[i] + wonPlayer2[i]) * i;
+		};
+		document.write("<br/><b>" + average / 1000 + "</b>");
+		document.write("<br/><br/>e. Do the chances of winning improve with the length of the game?");
+		document.write("<br/>No really. (based on the results)");
+
+	}
+	function rolldice() {
+		dice1.value=Math.floor(Math.random()*6+1);
+		dice2.value=Math.floor(Math.random()*6+1);
+		dicesum.value=Number(dice1.value) + Number(dice2.value);
+		rollcount++;
+		if (state == 2) {
+			if (dicesum.value == point) {
+				shooter_wins();
+			} else {
+				if (dicesum.value == 7) {
+					shooter_loses();
+				} else {
+					//thisform.message.value = "Point is " + point + ". Roll again.";
+					rolldice();
+					}
+				}
+			} else {
+				if (state == 1) {
+					if (dicesum.value == 7 || dicesum.value == 11) {
+						shooter_wins();
+					} else {
+						if (dicesum.value == 2 || dicesum.value == 3 || dicesum.value == 12) {
+							shooter_loses();
+						} else {
+					state = 2;
+					point = dicesum.value;
+					//thisform.message.value = "Point is " + point + ". Roll again.";
+					rolldice();
+				}
+			}
+		} else {
+		if (state == 0) {
+			startgame();
+			//thisform.message.value = "Click 'Play New Game' to start.";
+				}
+			}
+		}
+	}
+	function getshooter() {
+		s = -1;
+		for (var i=shooter.length-1; i>-1; i--)
+			if (shooter[i].checked)
+				s = i; i = -1;
+		shoot = shooter[s].value;
+	}
+	function shooter_wins() {
+		if (shoot == "Player1") {
+			if (rollcount<count - 1)
+				wonPlayer1[rollcount - 1]++;
+			else
+				wonPlayer1[count-1]++;
+			p1score.value = Number(p1score.value) + 1;
+			p1win++;
+			//thisform.message.value = "The Player1 wins this game!";
+		} else {
+			if (rollcount<count-1)
+				wonPlayer2[rollcount - 1]++;
+			else
+				wonPlayer2[count-1]++;
+			p2score.value = Number(p2score.value) + 1;
+			p2win++;
+			//thisform.message.value = "The Player2 wins this game!";
+		}
+		startgame();
+		state = 0;
+	}
+	function shooter_loses() {
+		if (shoot == "Player1") {
+			if (rollcount<count-1)
+				wonPlayer2[rollcount - 1]++;
+			else
+				wonPlayer2[count-1]++;
+			p2score.value = Number(p2score.value) + 1;
+			p2win++;
+			//thisform.message.value = "The Player2 wins this game!";
+		} 
+		else {
+			if (rollcount<count-1)
+				wonPlayer1[rollcount - 1]++;
+			else
+				wonPlayer1[count-1]++;
+			p1score.value = Number(p1score.value) + 1;
+			p1win++;
+			//thisform.message.value = "The Player1 wins this game!";
+		}
+		startgame();
+		state = 0;
+	}
+	</script>
+ </HEAD>
+ <BODY>
+
+<H1>Craps in Javascript</H1>
+<B>Game Description:</B> The game of craps is a dice game played by two players, X and Y. First X tosses the pair of dice. If the sum of the dice is 7 or 11, X wins the game. If the sum is 2, 3, or 12, Y wins. Otherwise, the sum is designated as the "point," to be matched by another toss. So if neither player has won on the first toss, then the dice are tossed repeatedly until either the point or a 7 comes up. If a 7 comes up first, Y wins. Otherwise, X wins when the point comes up.<BR/>
+<HR WIDTH=600>
+<input type="button" name="newgame" value="Play New Game" onclick="startgame(true);">
+
+<div style="display:none">
+<TABLE CELLPADDING=10>
+	  <TR>
+	   <TD><B>Select Shooter:</B><BR>
+	       <input type="radio" name="shooter" value="Player" checked>player<BR>
+	       <input type="radio" name="shooter" value="Computer">computer<BR></TD>
+	   <TD><input type="button" name="newgame" value="Play New Game" onclick="startgame(true);"></TD>
+	  </TR>
+	  <TR>
+	   <TD ALIGN="CENTER"><B>Dice 1:</B> <input type="text" name="dice1" value="?" size=2 readonly><BR>
+	       <B>Dice 2:</B> <input type="text" name="dice2" value="?" size=2 readonly><BR><BR>
+	       <B>Sum:</B> <input type="text" name="dicesum" value="?" size=2 readonly><BR></TD>
+	   <TD ROWSPAN=2><B>Player1 Score:</B><BR>
+	       &nbsp;&nbsp;&nbsp;&nbsp;Games Won: <input type="text" name="p1score" value="0" size=2 readonly><BR>
+	       <B>Player2 Score:</B><BR>
+	       &nbsp;&nbsp;&nbsp;&nbsp;Games Won: <input type="text" name="p2score" value="0" size=2 readonly><BR>
+	       </TD>
+	  </TR>
+	 </TABLE>
+</div>
+</BODY>
+</HTML>

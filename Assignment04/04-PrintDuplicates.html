@@ -1,0 +1,70 @@
+<!--
+Oct 05 2013
+Assignment 3
+Authors:    Jorge E. Quiroga    A00824194
+Jorge H. Rodriguez A00541611
+
+4)Use a one-dimensional array to solve the following problem: Read in 20 numbers, each of which is
+between 10 and 100. As each number is read, print it only if it is not a duplicate of a number that has
+already been read. Provide for the “worst case,” in which all 20 numbers are different. Use the smallest
+possible array to solve this problem.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>04-PrintDuplicates</title>
+        <script type="text/javascript">
+			var arrNoDup = new Array();
+			var counter = 1;
+			function addNumber() {
+				if (counter <= 20) {
+				    if (counter == 1){
+				        document.getElementById("result").innerHTML = " ";
+				    }
+					var currNumber = parseInt(document.getElementById("currNumber").value);
+					if (isNaN(currNumber) || currNumber < 10 || currNumber > 100) {
+						alert("Please type a valid number");
+						document.getElementById("currNumber").value = "";
+						document.getElementById("currNumber").focus();
+						return false;
+					}
+					if (arrNoDup.indexOf(currNumber) < 0) {
+						arrNoDup.push(currNumber);
+					}
+                    document.getElementById("currNumber").value = "";
+                    document.getElementById("currNumber").focus();
+                    document.getElementById("lblNumber").innerHTML = "Number "+counter;
+					counter++;
+				}else{
+				    var strHTML = "<p><h3>Numbers typed not duplicated</h3></p>";
+				    for (var i=0; i<arrNoDup.length; i++){
+				        strHTML += "Number "+String(parseInt(i)+1)+":"+arrNoDup[i]+"<br/>";
+				    }
+				    document.getElementById("result").innerHTML = strHTML;
+				    arrNoDup = new Array();
+				    counter = 1;
+				}
+			}
+        </script>
+    </head>
+
+    <body>
+        <div>
+            <header>
+                <h2>Type 20 numbers between 10 and 100 and see all that weren't typed more than once</h2>
+            </header>
+            <form>
+                <div>
+                    <label for="currNumber" id="lblNumber">Number 1:</label>
+                    <input type="number" id="currNumber" value="">
+                </div>
+                <div>
+                    <input type="button" value="Input value and continue" onclick="addNumber()">
+                    &nbsp;
+                </div>
+            </form>
+        </div>
+        <div id="result"> </div>
+    </body>
+</html>

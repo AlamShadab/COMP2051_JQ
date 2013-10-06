@@ -1,0 +1,245 @@
+<!--  
+Oct 09 2013
+Assignment 4
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+1) Write JavaScript statements to accomplish each of the following tasks:
+a. Display the value of the seventh element of array f.
+b. Initialize each of the five elements of one-dimensional array g to 8.
+c. Total the elements of array c, which contains 100 numeric elements.
+d. Copy 11-element array a into the first portion of array b, which contains 34 elements.
+e. Determine and print the smallest and largest values contained in 99-element floatingpoint array w.
+f. Consider a two-by-three array t that will store integers.
+g. Write a statement that declares and creates array t.
+h. How many rows does t have?
+i. How many columns does t have?
+j. How many elements does t have?
+k. Write the names of all the elements in the second row of t.
+l. Write the names of all the elements in the third column of t.
+m. Write a single statement that sets the elements of t in row 1 and column 2 to zero.
+n. Write a series of statements that initializes each element of t to zero. Do not use a repetition structure.
+o. Write a nested for statement that initializes each element of t to zero.
+p. Write a series of statements that determines and prints the smallest value in array t.
+q. Write a statement that displays the elements of the first row of t.
+r. Write a statement that totals the elements of the fourth column of t.
+s. Write a series of statements that prints the array t in neat, tabular format. List the column subscripts as headings across the top, and list the row subscripts at the left of each row.
+
+-->
+<html>
+  <head>
+     <title>operations with Arrays</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+
+	    function Init(){
+			var f = new Array(1,2,3,4,5,6,7,8,9,10);
+			//a. Display the value of the seventh element of array f.
+			document.getElementById("results").innerHTML += "<b>a. Display the value of the seventh element of array f.</b>";
+			document.getElementById("results").innerHTML += "<br/>f = new Array(1,2,3,4,5,6,7,8,9,10);";
+			document.getElementById("results").innerHTML += "<br/>the value of the seventh element of array f is: " + f[6];
+
+			//b. Initialize each of the five elements of one-dimensional array g to 8.
+			var g = new Array();
+			for (i=0;i<5;i++)
+				g[i] = 8;
+			var s = "";
+			for (i=0;i<g.length;i++)
+				s += g[i].toString() + ",";
+			s = s.substring(0, s.length - 1); // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>b. Initialize each of the five elements of one-dimensional array g to 8.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//c. Total the elements of array c, which contains 100 numeric elements.
+			var c = new Array();
+			for (i=0;i<100;i++)
+				c[i] = Math.floor((Math.random()*10));
+			 s = "";
+			var sum = 0;
+			for (i=0;i<c.length;i++){
+				s += c[i].toString() + "+";
+				sum += c[i];
+			}
+			s = s.substring(0, s.length - 1); // remove last character
+			s += "=" + sum.toString();
+			document.getElementById("results").innerHTML += "<br/><br/><b>c. Total the elements of array c, which contains 100 numeric elements.</b>";
+			document.getElementById("results").innerHTML += "<br/><textarea rows='2' cols='104'>" + s + "</textarea>";
+
+			//d. Copy 11-element array a into the first portion of array b, which contains 34 elements.
+			var a = new Array();
+			s = "Array a:<br/>";
+			for (i=0;i<11;i++){
+				a[i] = Math.floor((Math.random()*10));
+				s += a[i].toString() + ",";
+			};
+			s = s.substring(0, s.length - 1); // remove last character
+			s += "<br/>Array b:<br/>";
+			var b = new Array();
+			for (i=0;i<34;i++){
+				b[i] = Math.floor((Math.random()*10));
+				s += b[i].toString() + ",";
+			}
+			s = s.substring(0, s.length - 1); // remove last character
+			s += "<br/>New array b:<br/>";
+			for (i=0;i<b.length;i++){
+				if (i<11)
+					b[i] = a[i];
+				s += b[i].toString() + ",";
+			}
+			s = s.substring(0, s.length - 1); // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>d. Copy 11-element array a into the first portion of array b, which contains 34 elements.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//e. Determine and print the smallest and largest values contained in 99-element floatingpoint array w.
+			var w = new Array();
+			s = "<textarea rows='10' cols='154'>";
+			for (i=0;i<99;i++){
+				w[i] = Math.random()*10;
+				s += w[i].toString() + ",";
+			};
+			s = s.substring(0, s.length - 1); // remove last character
+			s += "</textarea>"
+			var largest = w[0];
+			var smallest = w[0];
+			for (i=0;i<w.length;i++){
+				if (w[i] > largest)
+					largest = w[i];
+				if (w[i] < smallest)
+					smallest = w[i];
+			};
+			s += "<br/>Smallest:<br/>" + smallest.toString();
+			s += "<br/>Largest:<br/>" + largest.toString();
+			document.getElementById("results").innerHTML += "<br/><br/><b>e. Determine and print the smallest and largest values contained in 99-element floatingpoint array w.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//f. Consider a two-by-three array t that will store integers.
+			document.getElementById("results").innerHTML += "<br/><br/><b>f. Consider a two-by-three array t that will store integers.</b>";
+
+			//g. Write a statement that declares and creates array t.
+			
+			var t = [[1,2,3],[4,5,6]];
+			s = "var t = [[1,2,3],[4,5,6]];<br/>";
+			document.getElementById("results").innerHTML += "<br/><br/><b>g. Write a statement that declares and creates array t.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//h. How many rows does t have?
+			s = t.length; // number of rows
+			document.getElementById("results").innerHTML += "<br/><br/><b>h. How many rows does t have?.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//i. How many columns does t have?
+			s = t[0].length; // number of columns in first row
+			document.getElementById("results").innerHTML += "<br/><br/><b>i. How many columns does t have?</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//j. How many elements does t have?
+			s = t.length * t[0].length;
+			document.getElementById("results").innerHTML += "<br/><br/><b>j. How many elements does t have?</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//k. Write the names of all the elements in the second row of t.
+			s = "";
+			for (i=0;i<t[0].length;i++){
+				s += t[1][i].toString() + ",";
+			};
+			s = s.substring(0, s.length - 1); // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>k. Write the names of all the elements in the second row of t.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//l. Write the names of all the elements in the third column of t.
+			s = "";
+			for (i=0;i<t.length;i++){
+				s += t[i][2]+ ",";
+			};
+			s = s.substring(0, s.length - 1); // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>l. Write the names of all the elements in the third column of t.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//m. Write a single statement that sets the elements of t in row 1 and column 2 to zero.
+			t[0][1] = 0; //row 1 and column 2 
+			s = "t[0][1] = 0;";
+			document.getElementById("results").innerHTML += "<br/><br/><b>m. Write a single statement that sets the elements of t in row 1 and column 2 to zero.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//n. Write a series of statements that initializes each element of t to zero. Do not use a repetition structure.
+			t[0][0] = 0;
+			t[0][1] = 0;
+			t[0][2] = 0;
+			t[1][0] = 0;
+			t[1][1] = 0;
+			t[1][2] = 0;
+			s = "t[0][0] = 0;<br/>" +
+				"t[0][1] = 0;<br/>" +
+				"t[0][2] = 0;<br/>" +
+				"t[1][0] = 0;<br/>" +
+				"t[1][1] = 0;<br/>" +
+				"t[1][2] = 0;<br/>";
+			document.getElementById("results").innerHTML += "<br/><br/><b>n. Write a series of statements that initializes each element of t to zero. Do not use a repetition structure.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+			
+			//o. Write a nested for statement that initializes each element of t to zero.
+			s = "for (i=0;i<t.length;i++);<br/>" +
+				"  for (j=0;j<t[0].length;j++);<br/>" +
+				"    t[i][j] = 0;";
+			for (i=0;i<t.length;i++)
+				for (j=0;j<t[0].length;j++)
+					t[i][j] = 0;
+			document.getElementById("results").innerHTML += "<br/><br/><b>o. Write a nested for statement that initializes each element of t to zero.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//p. Write a series of statements that determines and prints the smallest value in array t.
+			t = [[1,2,3],[4,5,6]];
+			s = "t = [[1,2,3],[4,5,6]];<br/>";
+			smallest = t[0][0];
+			for (i=0;i<t.length;i++){
+				for (j=0;j<t[0].length;j++){
+					if (t[i][j] < smallest)
+						smallest = t[i][j];
+				};
+			};
+			s += "<br/>Smallest:<br/>" + smallest.toString();
+			document.getElementById("results").innerHTML += "<br/><br/><b>p. Write a series of statements that determines and prints the smallest value in array t.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//q. Write a statement that displays the elements of the first row of t.
+			s = "";
+			for (j=0;j<t[0].length;j++)
+				s += t[0][j] + ",";
+			s = s.substring(0, s.length - 1); // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>q. Write a statement that displays the elements of the first row of t.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//r. Write a statement that totals the elements of the fourth column of t.
+			t = [[1,2,3,7],[4,5,6,8]];
+			sum = 0;
+			s = "t = [[1,2,3,7],[4,5,6,8]];<br/>";
+			for (i=0;i<t.length;i++){
+				sum += t[i][3];
+				s += t[i][3] + "+";
+			}
+			s = s.substring(0, s.length - 1); // remove last character
+			s += "=" + sum;
+			document.getElementById("results").innerHTML += "<br/><br/><b>r. Write a statement that totals the elements of the fourth column of t.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//s. Write a series of statements that prints the array t in neat, tabular format. List the column subscripts as headings across the top, and list the row subscripts at the left of each row.
+			s = "&nbsp;&nbsp;&nbsp;<em>";
+			for (j=0;j<t[0].length;j++)
+				s += (j+1) + "&nbsp;&nbsp;";
+			s += "</em><br/>";
+			for (i=0;i<t.length;i++){
+				s += "<em>" + (i+1) + "  </em>";
+				for (j=0;j<t[0].length;j++){
+					s += t[i][j] + "&nbsp;&nbsp;";
+				}
+				s += "<br/>"
+			};
+			document.getElementById("results").innerHTML += "<br/><br/><b>s. Write a series of statements that prints the array t in neat, tabular format. List the column subscripts as headings across the top, and list the row subscripts at the left of each row.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+	    }
+     </script>
+</head>
+<body onload="Init()">
+<label id="results">
+</body>
+</html>

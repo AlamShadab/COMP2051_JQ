@@ -1,0 +1,82 @@
+<!--
+Oct 05 2013
+Assignment 3
+Authors:    Jorge E. Quiroga    A00824194
+         Jorge H. Rodriguez A00541611
+            
+2)Use a one-dimensional array to solve the following problem: A company pays its salespeople
+on a commission basis. The salespeople receive $200 per week plus 9 percent of their gross sales for
+that week. For example, a salesperson who grosses $5000 in sales in a week receives $200 plus 9
+percent of $5000, or a total of $650. Write a script (using an array of counters) that obtains the gross
+sales for each employee through an XHTML form and determines how many of the salespeople
+earned salaries in each of the following ranges (assume that each salesperson’s salary is truncated to
+an integer amount):
+a) $200–299
+b) $300–399
+c) $400–499
+d) $500–599
+e) $600–699
+f) $700–799
+g) $800–899
+h)i)$900–999
+$1000 and over
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>02-SalesComission</title>
+        <script type="text/javascript">
+            var arrSales = new Array(0,0,0,0,0,0,0,0);
+            var numSalesPersons = 1;
+            function addSale(){
+                var sales;
+                if (isNaN(document.getElementById("grossSales").value)){
+                    alert("Please type a valid number for the gross value");
+                    document.getElementById("grossSales").value = "";
+                    document.getElementById("grossSales").focus();
+                    return false;
+                }
+                numSalesPersons++;
+                sales = parseFloat(document.getElementById("grossSales").value)*0.09;
+                idx = Math.floor(sales/100);
+                if (idx < 0){
+                    idx = 0;
+                }
+                else if (idx >= 9){
+                    idx = 8;
+                }
+                arrSales[idx]++;
+                document.getElementById("pId").innerHTML = numSalesPersons;
+                document.getElementById("grossSales").value = "";
+                document.getElementById("grossSales").focus();
+            }
+            
+            function calculate(){
+                var strHTML = "<p><h3>Salesperson payment distribution</h3></p>";
+                for (var i=0; i< 6; i++){
+                    strHTML += "Between $"+String(parseInt(200+(i*100)))+" and $"+String(parseInt(i*100)+299)+":"+arrSales[i]+"<br/>";
+                }
+                strHTML += "More than $999 :"+arrSales[7]+"<br/>";
+                document.getElementById("result").innerHTML = strHTML;
+            }
+        </script>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h2>Salesmen <span id="pId">1</span> Payment</h2>
+            </header>
+            <form>
+            <div>
+              <label for="grossSales">Please type the gross income</label><input type="number" id="grossSales" value="">
+            </div>
+            <div>
+                <input type="button" value="Input value and continue" onclick="addSale()">&nbsp;
+                <input type="button" value="End input and Calculate" onclick="calculate()" />
+            </div>
+            </form>
+        </div>
+        <div id="result"> </div>
+    </body>
+</html>

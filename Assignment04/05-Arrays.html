@@ -1,0 +1,38 @@
+<!--  
+Oct 09 2013
+Assignment 4
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+5) Label the elements of three-by-five two-dimensional array sales to indicate the order in which they are set to zero by the following program segment:
+a. for ( var row in sales )
+b. for ( var col in sales[ row ] )
+c. sales[ row ][ col ] = 0;
+
+-->
+<html>
+  <head>
+     <title>operations with Arrays</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+
+	    function Init(){
+			var sales = [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15]];
+			var s = "";
+			for ( var row in sales ){
+				for ( var col in sales[ row ] ){
+					sales[ row ][ col ] = 0;
+					s += row + "," + col + "<br/>";
+				}
+			}
+			s = s.substring(0, s.length - 1); // remove last character
+			document.getElementById("results").innerHTML += "<b>Label the elements of three-by-five two-dimensional array sales to indicate the order in which they are set to zero by the following program segment:<br/>for ( var row in sales )<br/>&nbsp;&nbsp;for ( var col in sales[ row ] )<br/>&nbsp;&nbsp;&nbsp;&nbsp;sales[ row ][ col ] = 0;<br/></b>";
+			document.getElementById("results").innerHTML += "<br/>var sales = [[1,2,3,4,5],[6,7,8,9,10],[11,12,13,14,15]];";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+		}
+     </script>
+</head>
+<body onload="Init()">
+<label id="results">
+</body>
+</html>

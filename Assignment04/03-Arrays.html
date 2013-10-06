@@ -1,0 +1,66 @@
+<!--  
+Oct 09 2013
+Assignment 4
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+3) Write statements that perform the following operations for a one-dimensional array:
+a. Set the 10 elements of array counts to zeros.
+b. Add 1 to each of the 15 elements of array bonus.
+c. Display the five values of array bestScores, separated by spaces.
+
+-->
+<html>
+  <head>
+     <title>operations with Arrays</title>
+		<meta  charset="utf-8">
+		<script type="text/javascript" >
+
+	    function Init(){
+			var f = new Array(1,2,3,4,5,6,7,8,9,10);
+			//a. Set the 10 elements of array counts to zeros.
+			var s = "f = [";
+			for (i=0;i<f.length;i++){
+				f[i] = 0;
+				s += f[i].toString() + ",";
+			}
+			s = s.substring(0, s.length - 1) + "]"; // remove last character
+			document.getElementById("results").innerHTML += "<b>a. Set the 10 elements of array counts to zeros.</b>";
+			document.getElementById("results").innerHTML += "<br/>f = new Array(1,2,3,4,5,6,7,8,9,10);";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//b. Add 1 to each of the 15 elements of array bonus.
+			var bonus = new Array();
+			s = "bonus = [";
+			for (i=0;i<15;i++){
+				bonus[i] = Math.floor((Math.random()*10));
+				s += bonus[i].toString() + ",";
+			}
+			s = s.substring(0, s.length - 1) + "]"; // remove last character
+			s += "<br/>Adding 1 to each element:<br/>";
+			s += "bonus = [";
+			for (i=0;i<15;i++){
+				bonus[i] += 1;
+				s += bonus[i].toString() + ",";
+			}
+			s = s.substring(0, s.length - 1) + "]"; // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>b. Add 1 to each of the 15 elements of array bonus.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+
+			//c. Display the five values of array bestScores, separated by spaces.
+			var bestScores = new Array();
+			s = "bestScores = [";
+			for (i=0;i<5;i++){
+				bestScores[i] = Math.floor((Math.random()*10));
+				s += bestScores[i].toString() + ",";
+			}
+			s = s.substring(0, s.length - 1) + "]"; // remove last character
+			document.getElementById("results").innerHTML += "<br/><br/><b>c. Display the five values of array bestScores, separated by spaces.</b>";
+			document.getElementById("results").innerHTML += "<br/>" + s;
+		}
+     </script>
+</head>
+<body onload="Init()">
+<label id="results">
+</body>
+</html>

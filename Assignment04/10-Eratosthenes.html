@@ -1,0 +1,68 @@
+<!--
+Oct 05 2013
+Assignment 3
+Authors:    Jorge E. Quiroga    A00824194
+Jorge H. Rodriguez A00541611
+
+10) (The Sieve of Eratosthenes) A prime integer is an integer greater than 1 that is evenly divisible only by
+itself and 1. The Sieve of Eratosthenes is an algorithm for finding prime numbers. It operates as follows:
+11) a) Create an array with all elements initialized to 1 (true). Array elements with prime subscripts will
+remain as 1. All other array elements will eventually be set to zero.
+12) b) Set the first two elements to zero, since 0 and 1 are not prime. Starting with array subscript2, every
+time an array element is found whose value is 1, loop through the remainder of the array and set to zero
+every element whose subscript is a multiple of the subscript for the element with value 1. For array
+subscript 2, all elements beyond 2 in the array that are multiples of 2 will be set to zero (subscripts 4, 6,
+8, 10, etc.); for array subscript 3, all elements beyond 3 in the array that are multiples of 3 will be set to
+zero (subscripts 6, 9, 12, 15, etc.); and so on. When this process is complete, the array elements that are
+still set to 1 indicate that the subscript is a prime number. These subscripts can then be printed.Write a
+script that uses an array of 1000 elements to determine and print the prime numbers between 1 and
+999. Ignore element 0 of the array.
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>10-Eratosthenes</title>
+        <script type="text/javascript">
+			var arrNumbers = new Array(1000);
+			var upperLimit = 1000;
+			for (var idx = 2; idx < upperLimit; idx++) {
+				arrNumbers[idx] = 1;
+			}
+
+			function findPrimes() {
+				for (var i = 2; i <= Math.floor(Math.sqrt(upperLimit)); i++) {
+//				for (var i = 2; i <= Math.floor(upperLimit/2); i++) {
+					if (arrNumbers[i] == 1) {
+						for (var p = (i * 2); p < upperLimit; p += i) {
+							arrNumbers[p] = 0;
+						}
+					}
+				}
+				var strHTML = "<h2>List of primes Numbers found<h2><p>";
+				var counter = 1;
+				for (var idx = 2; idx < upperLimit; idx++) {
+					if (arrNumbers[idx] == 1){
+					    strHTML += "Prime number "+counter+" is "+idx+"<br/>";
+					    counter++;
+					}
+				}
+				document.getElementById("result").innerHTML = strHTML+"</p>";
+			}
+        </script>
+    </head>
+    <body>
+        <div>
+            <header>
+                <h1>List of prime numbers using Erathostenes algorithm</h1>
+            </header>
+            <div>
+                push the button below to show you the prime numbers until number 1000 using Erathostenes algorithm<br>
+                <input type="button" value="Give me primes!" onclick="findPrimes()">
+            </div>
+            <div id="result">
+
+            </div>
+        </div>
+    </body>
+</html>

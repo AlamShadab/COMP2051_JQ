@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>flightReservation</title>
+        <script type="text/javascript">
+			function getValue(varname) {
+				var url = window.location.href;
+
+				var urlParts = url.split("?");
+
+				if (urlParts.length == 0) {
+					return "";
+				}
+
+				var query = urlParts[1];
+				var vars = query.split("&");
+				var value = "";
+
+				for ( i = 0; i < vars.length; i++) {
+					var parts = vars[i].split("=");
+
+					if (parts[0] == varname) {
+     					value = parts[1];
+						break;
+					}
+				}
+
+				value = unescape(value);
+				// Convert "+"s to " "s
+				value.replace(/\+/g, " ");
+				return value;
+			}
+			
+			function genRegistration(){
+			    var classSeat=parseInt(getValue("seat"));
+			    if (classSeat>=1 && classSeat<=5){
+			        document.getElementById("result").innerHTML = "You have been assigned to First Class seat number "+classSeat+".";
+			    }else if (classSeat>=6 && classSeat<=10){
+                    document.getElementById("result").innerHTML = "You have been assigned to seat number "+classSeat+" in Economic Class.";
+                }
+                window.print();
+			}
+        </script>
+    </head>
+    <body onload="javascript:genRegistration();">
+        <div>
+            <header>
+                <h1>Flight Reservation</h1>
+            </header>
+            <div>
+                <h2>Your Reservation has been issued successfully.</h2>
+                <p id="result"> </p>
+            </div>
+            <div><input type="button" value="close" onclick="window.close();"></div>
+            <footer>
+                <p>
+                    &copy; Copyright by Canucks Airlines
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>
