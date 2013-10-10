@@ -1,0 +1,164 @@
+<!--  
+Oct 09 2013
+Assignment 4
+Authors:	Jorge H. Rodriguez	A00541611
+			Jorge E. Quiroga	A00824194
+
+13) (Simulation: The Tortoise and the Hare) In this problem, you will re-create one of the truly great moments in history, namely the classic race of the tortoise and the hare. You will use random number generation to develop a simulation of this memorable event. Our contenders begin the race at square 1 of 70 squares. Each square represents a possible position along the race course. The finish line is at square 70. The first contender to reach or pass square 70 is rewarded with a pail of fresh carrots and lettuce. The course weaves its way up the side of a slippery mountain, so occasionally the contenders lose ground. There is a clock that ticks once per second. With each tick of the clock, your script should adjust the position of the animals according to the rules. Use variables to keep track of the positions of the animals (i.e., position numbers are 1–70). Start each animal at position 1 (i.e., the “starting gate”). 
+
+If an animal slips left before square 1, move the animal back to square 1.
+
+i <= 10. For the tortoise, perform a “fast plod” when 1 <= i <= 5, a “slip” when 6 <= i <= 7 and a “slow plod” when 8 <= i <= 10. Use a similar technique to move the hare.
+Begin the race by printing
+BANG !!!!!
+AND THEY'RE OFF !!!!!
+Then, for each tick of the clock (i.e., each repetition of a loop), print a 70-position line showing the letter T in the position of the tortoise and the letter H in the position of the hare. Occasionally, the contenders will land on the same square. In this case, the tortoise bites the hare, and your script should print OUCH!!! beginning at that position. All print positions other than the T, the H or the OUCH!!! (in case of a tie) should be blank. After each line is printed, test whether either animal has reached or passed square 70. If so, print the winner, and terminate the simulation. If the tortoise wins, print TORTOISE WINS!!! YAY!!! If the hare wins, print Hare wins. Yuck! If both animals win on the same tick of the clock, you may want to favor the turtle (the “underdog”), or you may want to print It's a tie. If neither animal wins, perform the loop again to simulate the next tick of the clock. When you are ready to run your script, assemble a group of fans to watch the race. You’ll be amazed at how involved your audience gets!
+
+-->
+<html>
+<head>
+	<title>Tortoise and hare</title>
+	<style type = "text/css">
+		table { width:10 em}
+		th { text-align: center}
+	</style>
+	<script type = "text/javascript">
+		// create (declare) one new array
+		var posH = 1; // H;
+		var posT = 1; // T;
+		var track = new Array (70); // allocates seventy one elements in Array var raceCounter; // counts number of races finished function startScript ()
+		// Initialization phase
+		var intervalId; // var to stop the timer...
+		raceCounter = 0; // prepare to loop
+		// assign values to elements of Array track
+		for (var i = 0;i < track.length; ++i)
+			track[i] = i;
+		outputArray(track);
+
+		// output posT && posH in Array
+		function outputArray(theArray)
+		{
+			document.writeln("<table border = \"1\"");
+			document.writeln("<tbody><tr>");
+
+			var toPrint = "&nbsp;";
+			for (var i = 1; i <= theArray.length; i++)
+			{
+				toPrint = "&nbsp;";
+				if (i == posT) toPrint = "T";
+				if (i == posH) toPrint = "H";
+				if ((i == posT) && (i == posH)) toPrint = "OUCH!!!"; // tortoise and hare on same square
+				document.writeln("<td>" + toPrint + "</td>");
+			}
+			document.writeln("</tr></tbody></table>");
+		} // end function outputArray
+
+		// function update Clock
+		function updateClock(){
+			//document.write("<br/><br/>raceCounter= " + raceCounter);
+			moveposT();
+			moveposH();
+			//raceCounter ++;
+			if (posT > 70) posT = 70;
+			if (posH > 70) posH = 70;
+			outputArray(track);
+			if ((posH == 70) || (posT == 70))
+				raceEnds();
+			else
+				intervalId = window.setInterval(updateClock(), 1000);
+		} // ends update Clock
+
+		// function start of race
+		function raceStarts(){
+			document.write("BANG !!!!!<br/>AND THEY'RE OFF !!!!!<br/>");
+			outputArray(track);
+			//document.write("<br/>Tortoise position: " + posT);
+			//document.write("<br/>Hare position: " + posH);
+			intervalId = window.setInterval(updateClock(), 1000); // Call updateClock() every second
+		} // ends function raceStarts
+
+
+		function moveposT(){// moves by posT
+			i = Math.floor( Math.random() * 11);
+			//document.write("<br/>moveposT <B>i= " + i + "</B>");
+			if ((i >= 1) && (i <= 5)){ // fast plod
+				posT = posT + 3;       // 3 squares to the right
+				//document.write("<br/>Tortoise: Fast plod");
+			}
+			if ((i >= 6) && (i <= 7)){ // slip
+				posT = posT - 6;       // 6 squares to the left
+				//document.write("<br/>Tortoise: Slip");
+			}
+			if ((i >= 8) && (i <= 10)){// slow plod
+				posT = posT + 1;       // 1 square to the right
+				//document.write("<br/>Tortoise: Slow plod");
+			}
+			if (posT < 1){             // slips
+				posT = 1;              // move back to square 1
+				//document.write("<br/>Tortoise: Slips");
+			}
+			//document.write("<br/>Tortoise position: " + posT);
+		} // ends function moveposT
+
+		function moveposH()// moves by posH
+		{
+			i = Math.floor(Math.random() * 11);
+			//document.write("<br/>moveposH i= " + i);
+			if ((i >= 1) && (i <= 2)){// Sleep
+				posH = posH + 0;      // No move at all
+				//document.write("<br/>Hare: Sleep");
+			}
+			if ((i >= 3) && (i <= 4)){// Big hop
+				posH = posH + 9;      // 9 squares to the right
+				//document.write("<br/>Hare: Big hop");
+			}
+			if (5 == i){              // Big slip
+				posH = posH - 12;     // 12 squares to the right
+				//document.write("<br/>Hare: Big slip");
+			}
+			if ((i >= 7) && (i <= 8)){// Small hop
+				posH = posH + 1;      // 1 square to the right
+				//document.write("<br/>Hare: Small hop");
+			}
+			if ((i >= 9) && (i <= 10)){// Small slip
+				posH = posH - 2;       // 2 squares to the left
+				//document.write("<br/>Hare: Small slip");
+			}
+			if (posH < 1){             // slips
+				posH = 1;              // move back to square 1
+				//document.write("<br/>Hare: Slips");
+			}
+			//document.write("<br/>Hare position: " + posH);
+		} // ends function moveposH
+
+
+	// function end of race
+	function raceEnds()
+	// declare winner
+	{
+		clearInterval(intervalId);
+		if ((posT == 70 - 1) && (posH == 70 - 1))
+			document.write("<br/><br/><b>It's a tie.","The underdog wins</b>");
+		else {
+			if (posT >= 69)
+			{
+				posT = 70 - 1;
+				document.write("<br/><br/><b>Tortoise wins!!! Yay!!!</b>");
+			}
+			if (posH >= 69)
+			{
+				posH = 70 - 1;
+				document.write("<br/><br/><b>Hare wins.Yuck!</b>");
+			}
+		}
+	} // ends function raceEnds
+
+
+// -->
+</script>
+</head>
+<body onload="raceStarts();">
+raceStarts
+<label id="results">
+</body>
+</html>

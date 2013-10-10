@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Story Generator</title>
+    <script type="text/javascript">
+        var nouns = new Array("boy", "girl", "dog", "town", "car");
+        var verbs = new Array("drove", "jumped", "ran", "walked", "skipped");
+        var articles = new Array("the", "a", "one", "some", "any");
+        var preps = new Array("to", "from", "over", "under", "on");
+
+        function GeneratePhrase() {
+            var strPhrase = articles[Math.floor(Math.random() * (articles.length))];
+            strPhrase = strPhrase.charAt(0).toUpperCase()+strPhrase.substr(1,(strPhrase.length - 1));
+            strPhrase += " " + nouns[Math.floor(Math.random()*(nouns.length))];
+            strPhrase += " " + verbs[Math.floor(Math.random()*(verbs.length))];
+            strPhrase += " " + preps[Math.floor(Math.random()*(preps.length))];
+            strPhrase += " " + articles[Math.floor(Math.random()*(articles.length))];
+            strPhrase += " " + nouns[Math.floor(Math.random() * (nouns.length))]+".\n";
+            return strPhrase;
+        }
+
+        function GenerateStory() {
+            var story = "Once upon a time...\n";
+            for (var i=0; i<20; i++){
+                story += GeneratePhrase();
+            }
+            story += "\nTHE END.\n";
+            document.getElementById("taStory").value = story;
+        }
+    </script>
+</head>
+<body>
+    <h2>Click on the button below and get a funny story!</h2>
+    <div><input type="button" value="Tell me a Story" id="btnStory" onclick="GenerateStory()" /></div>
+    <div><textarea id="taStory" cols="80" rows="25"> </textarea></div>
+</body>
+</html>
