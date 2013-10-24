@@ -1,0 +1,18 @@
+<ValidUsers>
+	<user>
+    <userName>bob</userName>
+    <password>password</password>
+  </user>
+	<user>
+    <userName>peter</userName>
+    <password>P3v3ns1</password>
+  </user>
+	<user>
+    <userName>admin</userName>
+    <password>T0mc@t</password>
+  </user>
+	<user>
+    <userName>martha</userName>
+    <password>smith</password>
+  </user>
+</ValidUsers>
