@@ -22,6 +22,7 @@ function pimpify(ctrlId) {
 	}else{
 		$("#" + ctrlId).css("font-size", (parseInt(fontSize)+2) + "pt");
 	}
+	growText(ctrlId);
 }
 
 function blinging(ctrlId, bolder) {
