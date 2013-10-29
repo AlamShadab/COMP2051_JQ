@@ -2,8 +2,26 @@
  * @authors Jorge Quiroga and Jorge Rodriguez
  */
 
+var growing = false;
+var interv;
+
+function growText(ctrlId){
+	if (!growing){
+		interv = setInterval(pimpify(ctrlId), 500);
+		growing = true;
+	}else{
+		clearInterval(interv);
+		growing = false;
+	}
+}
+
 function pimpify(ctrlId) {
-	$("#" + ctrlId).css("font-size", "24pt");
+	var fontSize = parseFloat(parseFloat($("#" + ctrlId).css("font-size"))*72/96).toFixed(2);
+	if (fontSize == undefined || fontSize < 24){
+	    $("#" + ctrlId).css("font-size", "24pt");
+	}else{
+		$("#" + ctrlId).css("font-size", (parseInt(fontSize)+2) + "pt");
+	}
 }
 
 function blinging(ctrlId, bolder) {
