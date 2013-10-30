@@ -35,8 +35,10 @@
                     <fieldset>
                         <legend>Pimpification</legend>
                         <button value="Bigger Pimpin!" id="btnPimpin" onclick="pimpify('txtText')">Bigger Pimpin!</button><br/>
-                        <input type="checkbox" id="chkBling" onchange="javascript:alert('Changing text weight');blinging('txtText', this.checked)"><label accesskey="b" for="chkBling">Bling</label><br/>
-                        <button value="Snoopify!" id="btnSnoop" onclick="snoopify('txtText')">Snoopify!</button> 
+                        <input type="checkbox" id="chkBling" onchange="javascript:alert('Changing text weight');blinging('txtText', this.checked)"><label accesskey="b" for="chkBling">Bling</label>&nbsp;
+                        <button id="btnBling" value="Bling" onclick="setBackground(document.getElementById('chkBling').checked)">Bling!</button><br/>
+                        <button value="Snoopify!" id="btnSnoop" onclick="snoopify('txtText')">Snoopify!</button><br/>
+                        <button value="Igpay Atinlay" id="btnPigLatin" onclick="latinify('txtText')">Igpay Atinlay</button>
                     </fieldset>
                 </p>
             </article>
